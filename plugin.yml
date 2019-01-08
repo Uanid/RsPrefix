@@ -1,0 +1,19 @@
+﻿name: RsPrefix
+version: 1.9
+main: kr.tpsw.rsprefix.RsPrefix
+author: TPsw
+softdepend: [Vault]
+
+commands:
+    prefix:
+        description: '유저용 일반 명령어.'
+        aliases: [칭호]
+    pradmin:
+        aliases: [칭호관리]
+        description: '플러그인 관리 어드민용 명령어.'
+        permission: 'rsprefix.admin'
+    rsprefix:
+        aliases: [알피지칭호]
+        description: '플러그인 정보 확인 명령어.'
+    prupdate:
+        permission: 'rsprefix.admin'
