@@ -17,6 +17,6 @@ GUI혹은 CUI를 통해 소유하고 있는 여러 칭호들 가운데 표시할
     주요 기능: permission과 vault등 별도의 추가 플러그인 없이 간편하게 칭호 시스템 구현 가능
         vault와 연동하는 기능도 있습니다.
     작동이 확인된 마인크래프트 버전: [1.5.2-1.8.8] (아마 최신 버전까지 별다른 문제 없이 지원될거임)
-    업데이트 로그: http://tpsw.or.kr/53
-    다운로드: http://tpsw.or.kr/151
+    업데이트 로그: [http://tpsw.or.kr/53](http://tpsw.or.kr/53)
+    다운로드: [http://tpsw.or.kr/151](http://tpsw.or.kr/151)
 
