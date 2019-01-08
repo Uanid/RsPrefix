@@ -9,6 +9,8 @@
 
 GUI혹은 CUI를 통해 소유하고 있는 여러 칭호들 가운데 표시할 칭호를 선택 가능
 
+상세 소개 및 설명: [http://tpsw.or.kr/135](http://tpsw.or.kr/135)
+
 업데이트 로그: [http://tpsw.or.kr/53](http://tpsw.or.kr/53)
 
 다운로드: [http://tpsw.or.kr/151](http://tpsw.or.kr/151)
