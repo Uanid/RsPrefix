@@ -10,14 +10,14 @@ public class CommandRsPrefix implements CommandExecutor {
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-		sender.sendMessage("¡×6ÇÃ·¯±×ÀÎ ÀÌ¸§:¡×c RsPrefix");
-		sender.sendMessage("¡×6¹öÀü:¡×c " + RsPrefix.plugin.getDescription().getVersion());
-		sender.sendMessage("¡×6Á¦ÀÛÀÚ:¡×c TPsw");
-		sender.sendMessage("¡×6¸í·É¾îµé:");
-		sender.sendMessage("  - ¡×ersprefix[¾ËÇÇÁöÄªÈ£]: ¡×aÇÃ·¯±×ÀÎ Á¤º¸ È®ÀÎ");
-		sender.sendMessage("  - ¡×epradmin[ÄªÈ£°ü¸®]: ¡×aÇÃ·¯±×ÀÎ °ü¸® ¹× ¼³Á¤");
-		sender.sendMessage("  - ¡×eprefix[ÄªÈ£]: ¡×aÀ¯Àú¿ë ÄªÈ£ ¸í·É¾î");
-		sender.sendMessage("  - ¡×eprupdate: ¡×aÇÃ·¯±×ÀÎ ¾÷µ¥ÀÌÆ® (ÀÛµ¿¾ÈÇÔ, ¿À·ù¹ß»ıÀ§Çè)");
+		sender.sendMessage("Â§6í”ŒëŸ¬ê·¸ì¸ ì´ë¦„:Â§c RsPrefix");
+		sender.sendMessage("Â§6ë²„ì „:Â§c " + RsPrefix.plugin.getDescription().getVersion());
+		sender.sendMessage("Â§6ì œì‘ì:Â§c TPsw");
+		sender.sendMessage("Â§6ëª…ë ¹ì–´ë“¤:");
+		sender.sendMessage("  - Â§ersprefix[ì•Œí”¼ì§€ì¹­í˜¸]: Â§aí”ŒëŸ¬ê·¸ì¸ ì •ë³´ í™•ì¸");
+		sender.sendMessage("  - Â§epradmin[ì¹­í˜¸ê´€ë¦¬]: Â§aí”ŒëŸ¬ê·¸ì¸ ê´€ë¦¬ ë° ì„¤ì •");
+		sender.sendMessage("  - Â§eprefix[ì¹­í˜¸]: Â§aìœ ì €ìš© ì¹­í˜¸ ëª…ë ¹ì–´");
+		sender.sendMessage("  - Â§eprupdate: Â§aí”ŒëŸ¬ê·¸ì¸ ì—…ë°ì´íŠ¸ (ì‘ë™ì•ˆí•¨, ì˜¤ë¥˜ë°œìƒìœ„í—˜)");
 		return true;
 	}
 }

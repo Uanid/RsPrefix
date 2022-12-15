@@ -26,33 +26,33 @@ public class CommandPrAdmin implements CommandExecutor {
 		int len = args.length;
 		if (len == 0) {
 			if (label.equals("pradmin")) {
-				sender.sendMessage("¡×6/pradmin give <user> <prefix>");
-				sender.sendMessage("¡×6/pradmin view <user>");
-				sender.sendMessage("¡×6/pradmin remove <user> <index>");
-				sender.sendMessage("¡×6/pradmin gui <user>");
-				sender.sendMessage("¡×6/pradmin mode <default|prefix|suffix>");
-				sender.sendMessage("¡×c/pradmin preran (book|inst)");
-				sender.sendMessage("¡×c/pradmin addran <class> <prefix>");
-				sender.sendMessage("¡×c/pradmin viewran <class>");
-				sender.sendMessage("¡×c/pradmin removeran <class> <index>");
-				sender.sendMessage("¡×eclass=[basic, classic, rare, epic, legendary]");
-			} else if (label.equals("ÄªÈ£°ü¸®")) {
-				sender.sendMessage("¡×6/ÄªÈ£°ü¸® ÁÖ±â <ÇÃ·¹ÀÌ¾î> <ÄªÈ£>");
-				sender.sendMessage("¡×6/ÄªÈ£°ü¸® º¸±â <ÇÃ·¹ÀÌ¾î>");
-				sender.sendMessage("¡×6/ÄªÈ£°ü¸® »èÁ¦ <ÇÃ·¹ÀÌ¾î> <¹øÈ£>");
-				sender.sendMessage("¡×6/ÄªÈ£°ü¸® gui <ÇÃ·¹ÀÌ¾î>");
-				sender.sendMessage("¡×6/ÄªÈ£°ü¸® ¸ğµå <±âº»|Á¢µÎ»ç|Á¢¹Ì»ç>");
-				sender.sendMessage("¡×c/ÄªÈ£°ü¸® ·£´ıÄªÈ£ (Ã¥|Áï½Ã)");
-				sender.sendMessage("¡×c/ÄªÈ£°ü¸® ·£´ıÃß°¡ <µî±Ş> <ÄªÈ£>");
-				sender.sendMessage("¡×c/ÄªÈ£°ü¸® ·£´ıº¸±â <µî±Ş>");
-				sender.sendMessage("¡×c/ÄªÈ£°ü¸® ·£´ı»èÁ¦ <µî±Ş> <¹øÈ£>");
-				sender.sendMessage("¡×eµî±Ş=[basic, classic, rare, epic, legendary]");
+				sender.sendMessage("Â§6/pradmin give <user> <prefix>");
+				sender.sendMessage("Â§6/pradmin view <user>");
+				sender.sendMessage("Â§6/pradmin remove <user> <index>");
+				sender.sendMessage("Â§6/pradmin gui <user>");
+				sender.sendMessage("Â§6/pradmin mode <default|prefix|suffix>");
+				sender.sendMessage("Â§c/pradmin preran (book|inst)");
+				sender.sendMessage("Â§c/pradmin addran <class> <prefix>");
+				sender.sendMessage("Â§c/pradmin viewran <class>");
+				sender.sendMessage("Â§c/pradmin removeran <class> <index>");
+				sender.sendMessage("Â§eclass=[basic, classic, rare, epic, legendary]");
+			} else if (label.equals("ì¹­í˜¸ê´€ë¦¬")) {
+				sender.sendMessage("Â§6/ì¹­í˜¸ê´€ë¦¬ ì£¼ê¸° <í”Œë ˆì´ì–´> <ì¹­í˜¸>");
+				sender.sendMessage("Â§6/ì¹­í˜¸ê´€ë¦¬ ë³´ê¸° <í”Œë ˆì´ì–´>");
+				sender.sendMessage("Â§6/ì¹­í˜¸ê´€ë¦¬ ì‚­ì œ <í”Œë ˆì´ì–´> <ë²ˆí˜¸>");
+				sender.sendMessage("Â§6/ì¹­í˜¸ê´€ë¦¬ gui <í”Œë ˆì´ì–´>");
+				sender.sendMessage("Â§6/ì¹­í˜¸ê´€ë¦¬ ëª¨ë“œ <ê¸°ë³¸|ì ‘ë‘ì‚¬|ì ‘ë¯¸ì‚¬>");
+				sender.sendMessage("Â§c/ì¹­í˜¸ê´€ë¦¬ ëœë¤ì¹­í˜¸ (ì±…|ì¦‰ì‹œ)");
+				sender.sendMessage("Â§c/ì¹­í˜¸ê´€ë¦¬ ëœë¤ì¶”ê°€ <ë“±ê¸‰> <ì¹­í˜¸>");
+				sender.sendMessage("Â§c/ì¹­í˜¸ê´€ë¦¬ ëœë¤ë³´ê¸° <ë“±ê¸‰>");
+				sender.sendMessage("Â§c/ì¹­í˜¸ê´€ë¦¬ ëœë¤ì‚­ì œ <ë“±ê¸‰> <ë²ˆí˜¸>");
+				sender.sendMessage("Â§eë“±ê¸‰=[basic, classic, rare, epic, legendary]");
 			}
 
-		} else if ((args[0].equals("give") || args[0].equals("ÁÖ±â")) && len >= 3) {
+		} else if ((args[0].equals("give") || args[0].equals("ì£¼ê¸°")) && len >= 3) {
 			String target = PlayersAPI.findOfflinePlayerName(args[1]);
 			if (target == null) {
-				sender.sendMessage("¡×6ÇØ´ç ÀÌ¸§À¸·Î °Ë»öµÈ À¯Àú°¡ ¾ø½À´Ï´Ù.");
+				sender.sendMessage("Â§6í•´ë‹¹ ì´ë¦„ìœ¼ë¡œ ê²€ìƒ‰ëœ ìœ ì €ê°€ ì—†ìŠµë‹ˆë‹¤.");
 				return true;
 			}
 
@@ -60,7 +60,7 @@ public class CommandPrAdmin implements CommandExecutor {
 			if (!FileAPI.isLoadedPlayer(target)) {
 				FileAPI.loadPlayer(target);
 				isLoaded = false;
-			}// À¯Àú ·Î±×¾Æ¿ôÀÏ ¶§ µ¥ÀÌÅÍ ·Îµå
+			}// ìœ ì € ë¡œê·¸ì•„ì›ƒì¼ ë•Œ ë°ì´í„° ë¡œë“œ
 
 			PrefixPlayer pp = FileAPI.getPrefixPlayer(target);
 			List<String> list = pp.getList();
@@ -73,7 +73,7 @@ public class CommandPrAdmin implements CommandExecutor {
 				prefix = StringAPI.mergeArgs(args, 2);
 			}
 
-			prefix = prefix.replace("&", "¡×");
+			prefix = prefix.replace("&", "Â§");
 			if (!list.contains(prefix)) {
 				list.add(prefix);
 				pp.needUpdateInv = true;
@@ -86,17 +86,17 @@ public class CommandPrAdmin implements CommandExecutor {
 			if (isLastNo) {
 				return true;
 			}
-			sender.sendMessage("¡×6" + target + " À¯Àú¿¡ " + prefix + "¡×6ÄªÈ£¸¦ Ãß°¡Çß½À´Ï´Ù.");
+			sender.sendMessage("Â§6" + target + " ìœ ì €ì— " + prefix + "Â§6ì¹­í˜¸ë¥¼ ì¶”ê°€í–ˆìŠµë‹ˆë‹¤.");
 
-		} else if ((args[0].equals("remove") || args[0].equals("»èÁ¦")) && (len == 3 || len == 4)) {
+		} else if ((args[0].equals("remove") || args[0].equals("ì‚­ì œ")) && (len == 3 || len == 4)) {
 			String target = PlayersAPI.findOfflinePlayerName(args[1]);
 			if (target == null) {
-				sender.sendMessage("¡×6ÇØ´ç ÀÌ¸§À¸·Î °Ë»öµÈ À¯Àú°¡ ¾ø½À´Ï´Ù.");
+				sender.sendMessage("Â§6í•´ë‹¹ ì´ë¦„ìœ¼ë¡œ ê²€ìƒ‰ëœ ìœ ì €ê°€ ì—†ìŠµë‹ˆë‹¤.");
 				return true;
 			}
 
 			if (!FileAPI.isLoadedPlayer(target)) {
-				sender.sendMessage("¡×6Á¢¼ÓÁßÀÎ ÇÃ·¹ÀÌ¾î¸¸ º¼ ¼ö ÀÖ½À´Ï´Ù.");
+				sender.sendMessage("Â§6ì ‘ì†ì¤‘ì¸ í”Œë ˆì´ì–´ë§Œ ë³¼ ìˆ˜ ìˆìŠµë‹ˆë‹¤.");
 				return true;
 			}
 
@@ -110,24 +110,24 @@ public class CommandPrAdmin implements CommandExecutor {
 			if (ObjectAPI.isListHasIndex(list, index)) {
 				list.remove(index);
 			} else {
-				sender.sendMessage("¡×6ÄªÈ£ ¸ñ·ÏÀ» ¹ş¾î³­ ¼ıÀÚÀÔ´Ï´Ù.");
+				sender.sendMessage("Â§6ì¹­í˜¸ ëª©ë¡ì„ ë²—ì–´ë‚œ ìˆ«ìì…ë‹ˆë‹¤.");
 				return true;
-			}// ÄªÈ£ »èÁ¦
+			}// ì¹­í˜¸ ì‚­ì œ
 			pp.needUpdateInv = true;
 
-			if (len == 4 && args[3].equals("³ë!")) {
+			if (len == 4 && args[3].equals("ë…¸!")) {
 				return true;
-			}// ³ë!
-			sender.sendMessage("¡×6" + target + " À¯ÀúÀÇ " + args[2] + "¡×6¹øÂ° ÄªÈ£¸¦ »èÁ¦Çß½À´Ï´Ù.");
-		} else if ((args[0].equals("view") || args[0].equals("º¸±â")) && (len == 3 || len == 2)) {
+			}// ë…¸!
+			sender.sendMessage("Â§6" + target + " ìœ ì €ì˜ " + args[2] + "Â§6ë²ˆì§¸ ì¹­í˜¸ë¥¼ ì‚­ì œí–ˆìŠµë‹ˆë‹¤.");
+		} else if ((args[0].equals("view") || args[0].equals("ë³´ê¸°")) && (len == 3 || len == 2)) {
 			String target = PlayersAPI.findOfflinePlayerName(args[1]);
 			if (target == null) {
-				sender.sendMessage("¡×6ÇØ´ç ÀÌ¸§À¸·Î °Ë»öµÈ À¯Àú°¡ ¾ø½À´Ï´Ù.");
+				sender.sendMessage("Â§6í•´ë‹¹ ì´ë¦„ìœ¼ë¡œ ê²€ìƒ‰ëœ ìœ ì €ê°€ ì—†ìŠµë‹ˆë‹¤.");
 				return true;
 			}
 
 			if (!FileAPI.isLoadedPlayer(target)) {
-				sender.sendMessage("¡×6Á¢¼ÓÁßÀÎ ÇÃ·¹ÀÌ¾î¸¸ º¼ ¼ö ÀÖ½À´Ï´Ù.");
+				sender.sendMessage("Â§6ì ‘ì†ì¤‘ì¸ í”Œë ˆì´ì–´ë§Œ ë³¼ ìˆ˜ ìˆìŠµë‹ˆë‹¤.");
 				return true;
 			}
 
@@ -137,13 +137,13 @@ public class CommandPrAdmin implements CommandExecutor {
 				if (API.isIntegerPositive(args[2])) {
 					index = Integer.valueOf(args[2]);
 				}
-			}// 3°³ ÀÎÀÚÀÏ °æ¿ì index µ¤¾î¾²±â
+			}// 3ê°œ ì¸ìì¼ ê²½ìš° index ë®ì–´ì“°ê¸°
 
 			API.sendMessageList(sender, pp.getList(), index, "pradmin view");
 		} else if (args[0].equals("gui") && (len == 2 || len == 3)) {
 			String target = PlayersAPI.findOfflinePlayerName(args[1]);
 			if (target == null) {
-				sender.sendMessage("¡×6ÇØ´ç ÀÌ¸§À¸·Î °Ë»öµÈ À¯Àú°¡ ¾ø½À´Ï´Ù.");
+				sender.sendMessage("Â§6í•´ë‹¹ ì´ë¦„ìœ¼ë¡œ ê²€ìƒ‰ëœ ìœ ì €ê°€ ì—†ìŠµë‹ˆë‹¤.");
 				return true;
 			}
 
@@ -152,36 +152,36 @@ public class CommandPrAdmin implements CommandExecutor {
 				if (API.isIntegerPositive(args[2])) {
 					index = Integer.valueOf(args[2]);
 				}
-			}// 2°³ ÀÎÀÚÀÏ °æ¿ì index µ¤¾î¾²±â
+			}// 2ê°œ ì¸ìì¼ ê²½ìš° index ë®ì–´ì“°ê¸°
 			InvAPI.viewInv(target, (Player) sender, index);
-		} else if ((args[0].equals("addran") || args[0].equals("·£´ıÃß°¡")) && len >= 3) {
+		} else if ((args[0].equals("addran") || args[0].equals("ëœë¤ì¶”ê°€")) && len >= 3) {
 			if (RanPreAPI.isRanpreClass(args[1])) {
 				List<String> ranpre = RanPreAPI.getRanpreList(args[1]);
-				String prefix = StringAPI.mergeArgs(args, 2).replace("&", "¡×");
+				String prefix = StringAPI.mergeArgs(args, 2).replace("&", "Â§");
 				ranpre.add(prefix);
-				sender.sendMessage("¡×6" + args[1] + "¿¡ ¡×r<" + prefix + "¡×r>¡×6¸¦ Ãß°¡Çß½À´Ï´Ù.");
+				sender.sendMessage("Â§6" + args[1] + "ì— Â§r<" + prefix + "Â§r>Â§6ë¥¼ ì¶”ê°€í–ˆìŠµë‹ˆë‹¤.");
 			} else {
-				sender.sendMessage("¡×6¿Ã¹Ù¸¥ µî±Ş ÀÌ¸§ÀÌ ¾Æ´Õ´Ï´Ù.");
+				sender.sendMessage("Â§6ì˜¬ë°”ë¥¸ ë“±ê¸‰ ì´ë¦„ì´ ì•„ë‹™ë‹ˆë‹¤.");
 			}
-		} else if ((args[0].equals("mode") || args[0].equals("¸ğµå")) && len == 2) {
-			if (args[1].equals("default") || args[1].equals("±âº»")) {
+		} else if ((args[0].equals("mode") || args[0].equals("ëª¨ë“œ")) && len == 2) {
+			if (args[1].equals("default") || args[1].equals("ê¸°ë³¸")) {
 				RsPrefix.config.set("config.mode", 1);
 				RsPrefix.prefixMode = 1;
-				sender.sendMessage("¡×6ÇØ´ç ¸ğµå »ç¿ë °¡´É ¿©ºÎ: ¡×btrue");
-			} else if (args[1].equals("prefix") || args[1].equals("Á¢µÎ»ç")) {
+				sender.sendMessage("Â§6í•´ë‹¹ ëª¨ë“œ ì‚¬ìš© ê°€ëŠ¥ ì—¬ë¶€: Â§btrue");
+			} else if (args[1].equals("prefix") || args[1].equals("ì ‘ë‘ì‚¬")) {
 				RsPrefix.config.set("config.mode", 2);
 				RsPrefix.prefixMode = 2;
-				sender.sendMessage("¡×6ÇØ´ç ¸ğµå »ç¿ë °¡´É ¿©ºÎ: " + (VaultHook.isChatHook ? "¡×btrue" : "¡×cfalse"));
-			} else if (args[1].equals("suffix") || args[1].equals("Á¢¹Ì»ç")) {
+				sender.sendMessage("Â§6í•´ë‹¹ ëª¨ë“œ ì‚¬ìš© ê°€ëŠ¥ ì—¬ë¶€: " + (VaultHook.isChatHook ? "Â§btrue" : "Â§cfalse"));
+			} else if (args[1].equals("suffix") || args[1].equals("ì ‘ë¯¸ì‚¬")) {
 				RsPrefix.config.set("config.mode", 3);
-				sender.sendMessage("¡×6ÇØ´ç ¸ğµå »ç¿ë °¡´É ¿©ºÎ: " + (VaultHook.isChatHook ? "¡×btrue" : "¡×cfalse"));
+				sender.sendMessage("Â§6í•´ë‹¹ ëª¨ë“œ ì‚¬ìš© ê°€ëŠ¥ ì—¬ë¶€: " + (VaultHook.isChatHook ? "Â§btrue" : "Â§cfalse"));
 				RsPrefix.prefixMode = 3;
 			} else {
-				sender.sendMessage("¡×6¿Ã¹Ù¸¥ ¸ğµå Å¸ÀÔÀ» ÀÔ·ÂÇÏ½Ê½Ã¿À.");
+				sender.sendMessage("Â§6ì˜¬ë°”ë¥¸ ëª¨ë“œ íƒ€ì…ì„ ì…ë ¥í•˜ì‹­ì‹œì˜¤.");
 				return true;
 			}
-			sender.sendMessage("¡×6ÄªÈ£ Ç¥½Ã ¸ğµå¸¦ " + args[1] + "(À¸)·Î º¯°æÇß½À´Ï´Ù.");
-		} else if ((args[0].equals("viewran") || args[0].equals("·£´ıº¸±â")) && (len == 3 || len == 2)) {
+			sender.sendMessage("Â§6ì¹­í˜¸ í‘œì‹œ ëª¨ë“œë¥¼ " + args[1] + "(ìœ¼)ë¡œ ë³€ê²½í–ˆìŠµë‹ˆë‹¤.");
+		} else if ((args[0].equals("viewran") || args[0].equals("ëœë¤ë³´ê¸°")) && (len == 3 || len == 2)) {
 			if (RanPreAPI.isRanpreClass(args[1])) {
 				List<String> ranpre = RanPreAPI.getRanpreList(args[1]);
 
@@ -190,13 +190,13 @@ public class CommandPrAdmin implements CommandExecutor {
 					if (API.isIntegerPositive(args[2])) {
 						index = Integer.valueOf(args[2]);
 					}
-				}// 3°³ ÀÎÀÚÀÏ °æ¿ì index µ¤¾î¾²±â
+				}// 3ê°œ ì¸ìì¼ ê²½ìš° index ë®ì–´ì“°ê¸°
 
 				API.sendMessageList(sender, ranpre, index, "pradmin viewran");
 			} else {
-				sender.sendMessage("¡×6¿Ã¹Ù¸¥ µî±Ş ÀÌ¸§ÀÌ ¾Æ´Õ´Ï´Ù.");
+				sender.sendMessage("Â§6ì˜¬ë°”ë¥¸ ë“±ê¸‰ ì´ë¦„ì´ ì•„ë‹™ë‹ˆë‹¤.");
 			}
-		} else if ((args[0].equals("removeran") || args[0].equals("·£´ı»èÁ¦")) && len == 3) {
+		} else if ((args[0].equals("removeran") || args[0].equals("ëœë¤ì‚­ì œ")) && len == 3) {
 			if (RanPreAPI.isRanpreClass(args[1])) {
 				List<String> ranpre = RanPreAPI.getRanpreList(args[1]);
 
@@ -208,31 +208,31 @@ public class CommandPrAdmin implements CommandExecutor {
 				if (ObjectAPI.isListHasIndex(ranpre, index)) {
 					ranpre.remove(index);
 				} else {
-					sender.sendMessage("¡×6ÄªÈ£ ¸ñ·ÏÀ» ¹ş¾î³­ ¼ıÀÚÀÔ´Ï´Ù.");
+					sender.sendMessage("Â§6ì¹­í˜¸ ëª©ë¡ì„ ë²—ì–´ë‚œ ìˆ«ìì…ë‹ˆë‹¤.");
 					return true;
-				}// ÄªÈ£ »èÁ¦
+				}// ì¹­í˜¸ ì‚­ì œ
 
-				sender.sendMessage("¡×6" + args[1] + "ÀÇ " + index + "¹øÂ° ÄªÈ£¸¦ »èÁ¦Çß½À´Ï´Ù.");
+				sender.sendMessage("Â§6" + args[1] + "ì˜ " + index + "ë²ˆì§¸ ì¹­í˜¸ë¥¼ ì‚­ì œí–ˆìŠµë‹ˆë‹¤.");
 			} else {
-				sender.sendMessage("¡×6¿Ã¹Ù¸¥ µî±Ş ÀÌ¸§ÀÌ ¾Æ´Õ´Ï´Ù.");
+				sender.sendMessage("Â§6ì˜¬ë°”ë¥¸ ë“±ê¸‰ ì´ë¦„ì´ ì•„ë‹™ë‹ˆë‹¤.");
 			}
-		} else if ((args[0].equals("preran") || args[0].equals("·£´ıÄªÈ£")) && len == 2) {
+		} else if ((args[0].equals("preran") || args[0].equals("ëœë¤ì¹­í˜¸")) && len == 2) {
 			if (sender instanceof Player) {
-				if (args[1].equals("book") || args[1].equals("Ã¥")) {
+				if (args[1].equals("book") || args[1].equals("ì±…")) {
 					Player p = (Player) sender;
 					RanPreAPI.giveRanPreBook(p);
-					sender.sendMessage("¡×6·£´ı ÄªÈ£ È¹µæ ¾ÆÀÌÅÛÀ» ¾ò¾ú½À´Ï´Ù.");
-				} else if (args[1].equals("inst") || args[1].equals("Áï½Ã")) {
+					sender.sendMessage("Â§6ëœë¤ ì¹­í˜¸ íšë“ ì•„ì´í…œì„ ì–»ì—ˆìŠµë‹ˆë‹¤.");
+				} else if (args[1].equals("inst") || args[1].equals("ì¦‰ì‹œ")) {
 					Player p = (Player) sender;
 					RanPreAPI.runRandomPrefix(p);
 				} else {
-					sender.sendMessage("¡×6Àß¸øµÈ ÀÎÀÚ¸¦ ÀÔ·ÂÇß½À´Ï´Ù.");
+					sender.sendMessage("Â§6ì˜ëª»ëœ ì¸ìë¥¼ ì…ë ¥í–ˆìŠµë‹ˆë‹¤.");
 				}
 			} else {
-				sender.sendMessage("ÄÜ¼ÖÀº »ç¿ëÀÌ ºÒ°¡´ÉÇÑ ¸í·É¾îÀÔ´Ï´Ù.");
+				sender.sendMessage("ì½˜ì†”ì€ ì‚¬ìš©ì´ ë¶ˆê°€ëŠ¥í•œ ëª…ë ¹ì–´ì…ë‹ˆë‹¤.");
 			}
 		} else {
-			sender.sendMessage("¡×6Àß¸øµÈ ¸í·É¾î ÀÎÀÚ¸¦ ÀÔ·ÂÇß½À´Ï´Ù.");
+			sender.sendMessage("Â§6ì˜ëª»ëœ ëª…ë ¹ì–´ ì¸ìë¥¼ ì…ë ¥í–ˆìŠµë‹ˆë‹¤.");
 		}
 		return true;
 	}

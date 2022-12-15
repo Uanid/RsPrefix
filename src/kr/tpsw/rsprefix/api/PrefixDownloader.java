@@ -15,10 +15,10 @@ public class PrefixDownloader {
 
 	public static void main(String[] args) {
 		saveNewRandomPrefixs();
-		System.out.println("¿Ï·á");
+		System.out.println("ì™„ë£Œ");
 	}
 
-	// ½º·¹µå·Î ½ÇÇà ÇÊ¼ö
+	// ìŠ¤ë ˆë“œë¡œ ì‹¤í–‰ í•„ìˆ˜
 	public static void saveNewRandomPrefixs() {
 		String posturl = "http://tpsw.or.kr/" + POST_ID;
 		StringBuilder sb = new StringBuilder();
@@ -36,12 +36,13 @@ public class PrefixDownloader {
 			BufferedReader br = new BufferedReader(new InputStreamReader(url.openStream(), "utf-8"));
 			String line;
 			while ((line = br.readLine()) != null) {
-				builder.append(line).append('\n');
+				builder.append(line).append('
+');
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		// stream°¡Á®¿À±â
+		// streamê°€ì ¸ì˜¤ê¸°
 
 		{
 			i1 = builder.indexOf("<div class=\"post-content\">");
@@ -49,77 +50,84 @@ public class PrefixDownloader {
 			i1 = builder.indexOf("<p>");
 			builder.delete(0, i1 + 3);
 			i1 = builder.indexOf("</div>");
-			args = builder.substring(0, i1).replace("&nbsp;", " ").replace("&lt;", "<").replace("&gt;", ">").replace("<p>", "").replace("\n", "").trim().split("</p>");
+			args = builder.substring(0, i1).replace("&nbsp;", " ").replace("&lt;", "<").replace("&gt;", ">").replace("<p>", "").replace("
+", "").trim().split("</p>");
 			for (String line : args) {
 				postlist.add(line);
-				sb.append(line).append('\n');
+				sb.append(line).append('
+');
 			}
-		}// °Ô½Ã¹° ºÎºĞ¸¸ ÀÚ¸£±â
+		}// ê²Œì‹œë¬¼ ë¶€ë¶„ë§Œ ìë¥´ê¸°
 
 		{
 			i1 = sb.indexOf("<" + PLUGIN_NAME_LOWER + ">");
 			i2 = sb.indexOf("</" + PLUGIN_NAME_LOWER + ">");
 			sb2 = new StringBuilder(sb.substring(i1 + PLUGIN_NAME_LOWER.length() + 3, i2 - 1));
-		}// ÇÃ·¯±×ÀÎ ºÎºĞ ÀÚ¸£±â
+		}// í”ŒëŸ¬ê·¸ì¸ ë¶€ë¶„ ìë¥´ê¸°
 
 		{
 			tag = "basic";
 			i1 = sb2.indexOf("<" + tag + ">");
 			i2 = sb2.indexOf("</" + tag + ">");
 			if (i1 == -1 || i2 == -1) {
-				args = new String[] { "¡×f´ººñ" };
+				args = new String[] { "Â§fë‰´ë¹„" };
 			} else {
-				args = sb2.substring(i1 + tag.length() + 3, i2 - 1).split("\n");
+				args = sb2.substring(i1 + tag.length() + 3, i2 - 1).split("
+");
 			}
-			saveNewPrefixs(new File("plugins\\RsPrefix\\RanPrefixs\\" + tag + ".txt"), args);
-		}// º£ÀÌÁ÷
+			saveNewPrefixs(new File("plugins\RsPrefix\RanPrefixs\" + tag + ".txt"), args);
+		}// ë² ì´ì§
 
 		{
 			tag = "classic";
 			i1 = sb2.indexOf("<" + tag + ">");
 			i2 = sb2.indexOf("</" + tag + ">");
 			if (i1 == -1 || i2 == -1) {
-				args = new String[] { "¡×f[ÃÊº¸ÀÚ]" };
+				args = new String[] { "Â§f[ì´ˆë³´ì]" };
 			} else {
-				args = sb2.substring(i1 + tag.length() + 3, i2 - 1).split("\n");
+				args = sb2.substring(i1 + tag.length() + 3, i2 - 1).split("
+");
 			}
-			saveNewPrefixs(new File("plugins\\RsPrefix\\RanPrefixs\\" + tag + ".txt"), args);
-		}// ÀÏ¹İ
+			saveNewPrefixs(new File("plugins\RsPrefix\RanPrefixs\" + tag + ".txt"), args);
+		}// ì¼ë°˜
 
 		{
 			tag = "rare";
 			i1 = sb2.indexOf("<" + tag + ">");
 			i2 = sb2.indexOf("</" + tag + ">");
 			if (i1 == -1 || i2 == -1) {
-				args = new String[] { "¡×b[Ä£ÀıÇÑ]" };
+				args = new String[] { "Â§b[ì¹œì ˆí•œ]" };
 			} else {
-				args = sb2.substring(i1 + tag.length() + 3, i2 - 1).split("\n");
+				args = sb2.substring(i1 + tag.length() + 3, i2 - 1).split("
+");
 			}
-			saveNewPrefixs(new File("plugins\\RsPrefix\\RanPrefixs\\" + tag + ".txt"), args);
-		}// Èñ±Í
+			saveNewPrefixs(new File("plugins\RsPrefix\RanPrefixs\" + tag + ".txt"), args);
+		}// í¬ê·€
 
 		{
 			tag = "epic";
 			i1 = sb2.indexOf("<" + tag + ">");
 			i2 = sb2.indexOf("</" + tag + ">");
 			if (i1 == -1 || i2 == -1) {
-				args = new String[] { "¡×f[¡×6Poi¡×f]" };
+				args = new String[] { "Â§f[Â§6PoiÂ§f]" };
 			} else {
-				args = sb2.substring(i1 + tag.length() + 3, i2 - 1).split("\n");
+				args = sb2.substring(i1 + tag.length() + 3, i2 - 1).split("
+");
 			}
-			saveNewPrefixs(new File("plugins\\RsPrefix\\RanPrefixs\\" + tag + ".txt"), args);
-		}// ¿µ¿õ
+			saveNewPrefixs(new File("plugins\RsPrefix\RanPrefixs\" + tag + ".txt"), args);
+		}// ì˜ì›…
 
 		{
 			tag = "legendary";
 			i1 = sb2.indexOf("<" + tag + ">");
 			i2 = sb2.indexOf("</" + tag + ">");
 			if (i1 == -1 || i2 == -1) {
-				args = new String[] { "¡×a[¡×c¼­¹ö¸¶½ºÅÍ¡×a]" };
+				args = new String[] { "Â§a[Â§cì„œë²„ë§ˆìŠ¤í„°Â§a]" };
 			} else {
-				args = sb2.substring(i1 + tag.length() + 3, i2 - 1).split("\n");
+				args = sb2.substring(i1 + tag.length() + 3, i2 - 1).split("
+");
 			}
-			saveNewPrefixs(new File("plugins\\RsPrefix\\RanPrefixs\\" + tag + ".txt"), args);
-		}// Àü¼³
+			saveNewPrefixs(new File("plugins\RsPrefix\RanPrefixs\" + tag + ".txt"), args);
+		}// ì „ì„¤
 	}
 }

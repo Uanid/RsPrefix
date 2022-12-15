@@ -34,13 +34,13 @@ public class FileAPI {
 	}
 
 	public static void loadPlayer(String name) {
-		File file = new File("plugins\\RsPrefix\\users\\" + name + ".yml");
+		File file = new File("plugins\RsPrefix\users\" + name + ".yml");
 		boolean firstaccess = false;
 		if (!file.exists()) {
 			firstaccess = true;
-		}// Ã³À½ Á¢¼Ó
+		}// ì²˜ìŒ ì ‘ì†
 
-		YamlConfiguration user = new YamlConfiguration("plugins\\RsPrefix\\users\\" + name + ".yml");
+		YamlConfiguration user = new YamlConfiguration("plugins\RsPrefix\users\" + name + ".yml");
 		List<String> list = user.getStringList("list");
 		String main = user.getString("main");
 		PrefixPlayer pp = new PrefixPlayer(name, list, main);
@@ -48,7 +48,7 @@ public class FileAPI {
 		if (firstaccess) {
 			List<String> li = pp.getList();
 			if (li == null || li.size() == 0 || li.get(0).equals("#null")) {
-				// ¸®½ºÆ® ºñ¾îÀÖ°Å³ª #nullÀÌ¸é
+				// ë¦¬ìŠ¤íŠ¸ ë¹„ì–´ìˆê±°ë‚˜ #nullì´ë©´
 			} else {
 				for (String str : RanPreAPI.basic) {
 					li.add(str);
@@ -60,14 +60,14 @@ public class FileAPI {
 	}
 
 	public static void savePlayer(String name, boolean removePlayer) {
-		YamlConfiguration user = new YamlConfiguration("plugins\\RsPrefix\\users\\" + name + ".yml");
+		YamlConfiguration user = new YamlConfiguration("plugins\RsPrefix\users\" + name + ".yml");
 		PrefixPlayer pp = map.get(name);
 		user.set("list", pp.getList());
 		user.set("main", pp.getMainPrefix());
 		user.saveYaml();
 		if (removePlayer)
 			map.remove(name);
-	}// ÀÚÃ¼ ¾ğ·Îµå ±â´É Æ÷ÇÔ
+	}// ìì²´ ì–¸ë¡œë“œ ê¸°ëŠ¥ í¬í•¨
 
 	public static PrefixPlayer getPrefixPlayer(String name) {
 		return map.get(name);

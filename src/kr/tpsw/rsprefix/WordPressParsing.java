@@ -48,18 +48,18 @@ public class WordPressParsing {
 	
 	public final static boolean IS_DATA_PAGE_CONNETED;
 
-	// 1.0 ¹öÀü Ç¥±â ¾ø´Â°Í
-	// 1.1 ¾÷µ¥ÀÌÆ® Ä¿¸Çµå¿¡ ¸Ş¼¼Áö ¹Ù²Ş
-	// 1.2 blacklist ip,version±â´É Ãß°¡
-	// 1.3 ÇÃ·¯±×ÀÎ ¹öÀü Ã¼Å© ±â´É °­È­
-	// 1.4 ÀÎÅÍ³İ ²÷±ä °æ¿ìµµ ÀÛµ¿ÇÏ°Ô ¼öÁ¤, ¾÷µ¥ÀÌÆ® ±â´É °­È­
-	// 1.5 ÀÎÅÍ³İ ²÷±è ¿©ºÎ º¯¼ö Ãß°¡
+	// 1.0 ë²„ì „ í‘œê¸° ì—†ëŠ”ê²ƒ
+	// 1.1 ì—…ë°ì´íŠ¸ ì»¤ë§¨ë“œì— ë©”ì„¸ì§€ ë°”ê¿ˆ
+	// 1.2 blacklist ip,versionê¸°ëŠ¥ ì¶”ê°€
+	// 1.3 í”ŒëŸ¬ê·¸ì¸ ë²„ì „ ì²´í¬ ê¸°ëŠ¥ ê°•í™”
+	// 1.4 ì¸í„°ë„· ëŠê¸´ ê²½ìš°ë„ ì‘ë™í•˜ê²Œ ìˆ˜ì •, ì—…ë°ì´íŠ¸ ê¸°ëŠ¥ ê°•í™”
+	// 1.5 ì¸í„°ë„· ëŠê¹€ ì—¬ë¶€ ë³€ìˆ˜ ì¶”ê°€
 
 	public static void main(String[] args) {
 		Map<String, List<String>> map = WordPressParsing.updateLogMap;
-		System.out.println("¾÷µ¥ÀÌÆ® ÇÊ¿ä: " + !PLUGIN_IS_FINAL_VERSION);
+		System.out.println("ì—…ë°ì´íŠ¸ í•„ìš”: " + !PLUGIN_IS_FINAL_VERSION);
 		if (map == null) {
-			System.out.println("¸øÃ£¾Ò´Ù");
+			System.out.println("ëª»ì°¾ì•˜ë‹¤");
 		}
 		for (String key : map.keySet()) {
 			System.out.println("<version>:".replace("<version>", key));
@@ -97,20 +97,21 @@ public class WordPressParsing {
 			BufferedReader br = new BufferedReader(new InputStreamReader(url.openStream(), "utf-8"));
 			String line;
 			while ((line = br.readLine()) != null) {
-				builder.append(line).append('\n');
+				builder.append(line).append('
+');
 			}
 		} catch (Exception e) {
 			if (e instanceof UnknownHostException) {
-				System.out.println("[" + PLUGIN_NAME + "] ¾÷µ¥ÀÌÆ® ÆäÀÌÁö¿Í ¿¬°áÇÒ ¼ö ¾ø½À´Ï´Ù. UnknownHostException");
+				System.out.println("[" + PLUGIN_NAME + "] ì—…ë°ì´íŠ¸ í˜ì´ì§€ì™€ ì—°ê²°í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤. UnknownHostException");
 			} else {
 				e.printStackTrace();
 			}
 			isConnected = false;
 		}
-		// stream°¡Á®¿À±â
+		// streamê°€ì ¸ì˜¤ê¸°
 
 		if (isConnected == true && builder.indexOf("Manager:TPsw") == -1) {
-			System.out.println("[" + PLUGIN_NAME + "] ¾÷µ¥ÀÌÆ® ÆäÀÌÁö°¡ ´©¶ôµÇ¾î ÀÖ½À´Ï´Ù.");
+			System.out.println("[" + PLUGIN_NAME + "] ì—…ë°ì´íŠ¸ í˜ì´ì§€ê°€ ëˆ„ë½ë˜ì–´ ìˆìŠµë‹ˆë‹¤.");
 			isConnected = false;
 		}
 		
@@ -126,7 +127,7 @@ public class WordPressParsing {
 				} else {
 					IP = builder.substring(i1 + tag.length() + 2, i2);
 				}
-			}// ip°¡Á®¿À±â
+			}// ipê°€ì ¸ì˜¤ê¸°
 
 			{
 				i1 = builder.indexOf("<div class=\"post-content\">");
@@ -134,24 +135,27 @@ public class WordPressParsing {
 				i1 = builder.indexOf("<p>");
 				builder.delete(0, i1 + 3);
 				i1 = builder.indexOf("</div>");
-				args = builder.substring(0, i1).replace("&nbsp;", " ").replace("&lt;", "<").replace("&gt;", ">").replace("<p>", "").replace("\n", "").trim().split("</p>");
+				args = builder.substring(0, i1).replace("&nbsp;", " ").replace("&lt;", "<").replace("&gt;", ">").replace("<p>", "").replace("
+", "").trim().split("</p>");
 				for (String line : args) {
 					postlist.add(line);
-					sb.append(line).append('\n');
+					sb.append(line).append('
+');
 				}
-			}// °Ô½Ã¹° ºÎºĞ¸¸ ÀÚ¸£±â
+			}// ê²Œì‹œë¬¼ ë¶€ë¶„ë§Œ ìë¥´ê¸°
 
 			{
 				i1 = sb.indexOf("<" + PLUGIN_NAME_LOWER + ">");
 				i2 = sb.indexOf("</" + PLUGIN_NAME_LOWER + ">");
 				sb2 = new StringBuilder(sb.substring(i1 + PLUGIN_NAME_LOWER.length() + 3, i2 - 1));
-			}// ÇÃ·¯±×ÀÎ ºÎºĞ ÀÚ¸£±â
+			}// í”ŒëŸ¬ê·¸ì¸ ë¶€ë¶„ ìë¥´ê¸°
 
 			{
 				tag = "update";
 				i1 = sb2.indexOf("<" + tag + ">");
 				i2 = sb2.indexOf("</" + tag + ">");
-				args = sb2.substring(i1 + tag.length() + 3, i2 - 1).split("\n");
+				args = sb2.substring(i1 + tag.length() + 3, i2 - 1).split("
+");
 				updateLogMap = new LinkedHashMap<String, List<String>>();
 				List<String> inst = null;
 				String name = null;
@@ -165,19 +169,19 @@ public class WordPressParsing {
 						inst.add(str.replace("-", ""));
 					}
 				}
-			}// ¾÷µ¥ÀÌÆ® ·Î±×
+			}// ì—…ë°ì´íŠ¸ ë¡œê·¸
 
 			{
 				tag = "download";
 				i1 = sb2.indexOf("<" + tag + ">");
 				i2 = sb2.indexOf("</" + tag + ">");
 				if (i1 == -1 || i2 == -1) {
-					// ³Ñ¾î°£´Ù
+					// ë„˜ì–´ê°„ë‹¤
 					PLUGIN_UPDATE_URL = null;
 				} else {
 					PLUGIN_UPDATE_URL = sb2.substring(i1 + tag.length() + 3, i2 - 1);
 				}
-			}// ´Ù¿î·Îµå ÁÖ¼Ò
+			}// ë‹¤ìš´ë¡œë“œ ì£¼ì†Œ
 
 			{
 				tag = "blacklist-ip";
@@ -186,10 +190,11 @@ public class WordPressParsing {
 				if (i1 == -1 || i2 == -1) {
 					blacklistsIp = null;
 				} else {
-					args = sb2.substring(i1 + tag.length() + 3, i2 - 1).split("\n");
+					args = sb2.substring(i1 + tag.length() + 3, i2 - 1).split("
+");
 					blacklistsIp = Arrays.asList(args);
 				}
-			}// ºí·¢¸®½ºÆ® ¾ÆÀÌÇÇ ÁÖ¼Ò
+			}// ë¸”ë™ë¦¬ìŠ¤íŠ¸ ì•„ì´í”¼ ì£¼ì†Œ
 
 			{
 				tag = "blacklist-version";
@@ -198,17 +203,18 @@ public class WordPressParsing {
 				if (i1 == -1 || i2 == -1) {
 					blacklistsVersion = null;
 				} else {
-					args = sb2.substring(i1 + tag.length() + 3, i2 - 1).split("\n");
+					args = sb2.substring(i1 + tag.length() + 3, i2 - 1).split("
+");
 					blacklistsVersion = Arrays.asList(args);
 				}
-			}// ºí·¢¸®½ºÆ® ¹öÀü
+			}// ë¸”ë™ë¦¬ìŠ¤íŠ¸ ë²„ì „
 
 			if (blacklistsIp != null && blacklistsIp.size() > 0) {
 				if (blacklistsIp.get(0).equals("*")) {
 					PLUGIN_IS_REGISTERED_BLACKLIST_IP = true;
 				} else {
 					PLUGIN_IS_REGISTERED_BLACKLIST_IP = blacklistsIp.contains(IP);
-				}// ¾ÆÀÌÇÇ Ã¼Å©
+				}// ì•„ì´í”¼ ì²´í¬
 			} else {
 				PLUGIN_IS_REGISTERED_BLACKLIST_IP = false;
 			}
@@ -218,7 +224,7 @@ public class WordPressParsing {
 					PLUGIN_IS_REGISTERED_BLACKLIST_VERSION = true;
 				} else {
 					PLUGIN_IS_REGISTERED_BLACKLIST_VERSION = blacklistsVersion.contains(PLUGIN_VERSION);
-				}// ¹öÀü Ã¼Å©
+				}// ë²„ì „ ì²´í¬
 			} else {
 				PLUGIN_IS_REGISTERED_BLACKLIST_VERSION = false;
 			}
@@ -235,7 +241,7 @@ public class WordPressParsing {
 			}
 
 			PLUGIN_IS_FINAL_VERSION = bool;
-			// ÃÖ½Å ¹öÀü È®ÀÎ
+			// ìµœì‹  ë²„ì „ í™•ì¸
 		} else {
 			updateLogMap = new HashMap<String, List<String>>();
 			blacklistsIp = new ArrayList<String>();
@@ -290,24 +296,24 @@ public class WordPressParsing {
 
 	private static boolean enableCheck() {
 		if (PLUGIN_IS_REGISTERED_BLACKLIST_VERSION) {
-			System.out.println("[" + PLUGIN_NAME + "] ÇÃ·¯±×ÀÎÀÌ ºí·¢¸®½ºÆ®¿¡ µî·ÏµÇ¾î ÀÖ½À´Ï´Ù.");
+			System.out.println("[" + PLUGIN_NAME + "] í”ŒëŸ¬ê·¸ì¸ì´ ë¸”ë™ë¦¬ìŠ¤íŠ¸ì— ë“±ë¡ë˜ì–´ ìˆìŠµë‹ˆë‹¤.");
 			return false;
 		}
 		if (PLUGIN_IS_REGISTERED_BLACKLIST_IP) {
-			System.out.println("[" + PLUGIN_NAME + "] ¼­¹ö°¡ ºí·¢¸®½ºÆ®¿¡ µî·ÏµÇ¾î ÀÖ½À´Ï´Ù.");
+			System.out.println("[" + PLUGIN_NAME + "] ì„œë²„ê°€ ë¸”ë™ë¦¬ìŠ¤íŠ¸ì— ë“±ë¡ë˜ì–´ ìˆìŠµë‹ˆë‹¤.");
 			return false;
 		}
 		if (PLUGIN_IS_FINAL_VERSION) {
-			System.out.println("[" + PLUGIN_NAME + "] ÇÃ·¯±×ÀÎÀÌ ÃÖ½Å ¹öÀüÀÔ´Ï´Ù.");
+			System.out.println("[" + PLUGIN_NAME + "] í”ŒëŸ¬ê·¸ì¸ì´ ìµœì‹  ë²„ì „ì…ë‹ˆë‹¤.");
 		} else {
-			System.out.println("[" + PLUGIN_NAME + "] ÇÃ·¯±×ÀÎÀÌ ÃÖ½Å ¹öÀüÀÌ ¾Æ´Õ´Ï´Ù.");
+			System.out.println("[" + PLUGIN_NAME + "] í”ŒëŸ¬ê·¸ì¸ì´ ìµœì‹  ë²„ì „ì´ ì•„ë‹™ë‹ˆë‹¤.");
 		}
 		return true;
 	}
 
 	public static boolean initRegister(Plugin pl, final PluginCommand pc, final File file) {
 		if (enableCheck() == false) {
-			System.out.println("[" + PLUGIN_NAME + "]ÇÃ·¯±×ÀÎÀ» °­Á¦·Î ºñÈ°¼ºÈ­½ÃÅµ´Ï´Ù.");
+			System.out.println("[" + PLUGIN_NAME + "]í”ŒëŸ¬ê·¸ì¸ì„ ê°•ì œë¡œ ë¹„í™œì„±í™”ì‹œí‚µë‹ˆë‹¤.");
 			Bukkit.getPluginManager().disablePlugin(pl);
 			return false;
 		}
@@ -317,7 +323,7 @@ public class WordPressParsing {
 			public void onJoin(PlayerJoinEvent event) {
 				Player player = event.getPlayer();
 				if ((player.hasPermission(PLUGIN_NAME_LOWER + ".admin") || player.isOp()) && !PLUGIN_IS_FINAL_VERSION) {
-					player.sendMessage("¡×6" + PLUGIN_NAME + "ÇÃ·¯±×ÀÎÀÇ »õ ¹öÀüÀÌ ¹ß°ßµÇ¾ú½À´Ï´Ù. ¸í·É¾î:" + pc.getLabel());
+					player.sendMessage("Â§6" + PLUGIN_NAME + "í”ŒëŸ¬ê·¸ì¸ì˜ ìƒˆ ë²„ì „ì´ ë°œê²¬ë˜ì—ˆìŠµë‹ˆë‹¤. ëª…ë ¹ì–´:" + pc.getLabel());
 				}
 			}
 		}, pl);
@@ -326,16 +332,16 @@ public class WordPressParsing {
 				@Override
 				public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 					if (args.length == 0) {
-						sender.sendMessage("¡×6/" + label + " true");
-						sender.sendMessage("¡×fÇÃ·¯±×ÀÎÀÇ ÃÖ½Å ¹öÀüÀ» ÀÚµ¿À¸·Î ³»·Á¹Ş½À´Ï´Ù.");
-						sender.sendMessage("¡×f¼­¹ö¸¦ ÀçºÎÆÃ ÇÏ°Ô µÉ °æ¿ì ÇÃ·¯±×ÀÎÀÌ »õ ¹öÀüÀ¸·Î Àû¿ëµË´Ï´Ù.");
+						sender.sendMessage("Â§6/" + label + " true");
+						sender.sendMessage("Â§fí”ŒëŸ¬ê·¸ì¸ì˜ ìµœì‹  ë²„ì „ì„ ìë™ìœ¼ë¡œ ë‚´ë ¤ë°›ìŠµë‹ˆë‹¤.");
+						sender.sendMessage("Â§fì„œë²„ë¥¼ ì¬ë¶€íŒ… í•˜ê²Œ ë  ê²½ìš° í”ŒëŸ¬ê·¸ì¸ì´ ìƒˆ ë²„ì „ìœ¼ë¡œ ì ìš©ë©ë‹ˆë‹¤.");
 					} else if (args[0].equals("true")) {
-						sender.sendMessage("¡×fÇÃ·¯±×ÀÎ ´Ù¿î·Îµå Áß...");
+						sender.sendMessage("Â§fí”ŒëŸ¬ê·¸ì¸ ë‹¤ìš´ë¡œë“œ ì¤‘...");
 						wordPressDownload(PLUGIN_UPDATE_URL, new File(file.getPath()));
-						sender.sendMessage("¡×fÇÃ·¯±×ÀÎÀÇ ÃÖ½Å ¹öÀüÀ» ÀÚµ¿À¸·Î ³»·Á¹Ş¾Ò½À´Ï´Ù.");
-						sender.sendMessage("¡×f¼­¹ö¸¦ ÀçºÎÆÃ ÇÏ°Ô µÉ °æ¿ì ÇÃ·¯±×ÀÎÀÌ »õ ¹öÀüÀ¸·Î Àû¿ëµË´Ï´Ù.");
+						sender.sendMessage("Â§fí”ŒëŸ¬ê·¸ì¸ì˜ ìµœì‹  ë²„ì „ì„ ìë™ìœ¼ë¡œ ë‚´ë ¤ë°›ì•˜ìŠµë‹ˆë‹¤.");
+						sender.sendMessage("Â§fì„œë²„ë¥¼ ì¬ë¶€íŒ… í•˜ê²Œ ë  ê²½ìš° í”ŒëŸ¬ê·¸ì¸ì´ ìƒˆ ë²„ì „ìœ¼ë¡œ ì ìš©ë©ë‹ˆë‹¤.");
 					} else {
-						sender.sendMessage("¡×c¿Ã¹Ù¸¥ ¸í·É¾î¸¦ ÀÔ·ÂÇÏ¼¼¿ä.");
+						sender.sendMessage("Â§cì˜¬ë°”ë¥¸ ëª…ë ¹ì–´ë¥¼ ì…ë ¥í•˜ì„¸ìš”.");
 					}
 					return false;
 				}

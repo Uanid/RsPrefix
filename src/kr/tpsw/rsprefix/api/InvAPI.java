@@ -17,26 +17,26 @@ public class InvAPI {
 	private static ItemStack back = new ItemStack(Material.WORKBENCH);
 	private static ItemStack next = new ItemStack(Material.ANVIL);
 	private static ItemStack main = new ItemStack(Material.ENCHANTMENT_TABLE);
-	public static String horusCode = "¡×a¡×a";
+	public static String horusCode = "Â§aÂ§a";
 
 	static {
 		ItemMeta im = back.getItemMeta();
-		im.setDisplayName("¡×eÀÌÀü ¸ñ·Ï");
+		im.setDisplayName("Â§eì´ì „ ëª©ë¡");
 		back.setItemMeta(im);
 
 		im = next.getItemMeta();
-		im.setDisplayName("¡×e´ÙÀ½ ¸ñ·Ï");
+		im.setDisplayName("Â§eë‹¤ìŒ ëª©ë¡");
 		next.setItemMeta(im);
 
 		im = main.getItemMeta();
-		im.setDisplayName("¡×e´ëÇ¥ ÄªÈ£");
+		im.setDisplayName("Â§eëŒ€í‘œ ì¹­í˜¸");
 		main.setItemMeta(im);
 
 	}
 
 	public static void viewInv(String target, Player caster, int index) {
 		if (!FileAPI.isLoadedPlayer(target)) {
-			caster.sendMessage("¡×6Á¢¼ÓÁßÀÎ ÇÃ·¹ÀÌ¾î¸¸ º¼ ¼ö ÀÖ½À´Ï´Ù.");
+			caster.sendMessage("Â§6ì ‘ì†ì¤‘ì¸ í”Œë ˆì´ì–´ë§Œ ë³¼ ìˆ˜ ìˆìŠµë‹ˆë‹¤.");
 			return;
 		}
 		PrefixPlayer pp = FileAPI.getPrefixPlayer(target);
@@ -46,9 +46,9 @@ public class InvAPI {
 		}
 
 		List<Inventory> invList = pp.getInvList();
-		// System.out.println("ÀÎº¥ ¸®½ºÆ® °³¼ö: " + invList.size() + "ÀÎµ¦½º" + index);
+		// System.out.println("ì¸ë²¤ ë¦¬ìŠ¤íŠ¸ ê°œìˆ˜: " + invList.size() + "ì¸ë±ìŠ¤" + index);
 		if (!ObjectAPI.isListHasIndex(invList, index - 1)) {
-			caster.sendMessage("¡×cÇØ´ç ¸ñ·ÏÀº Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.");
+			caster.sendMessage("Â§cí•´ë‹¹ ëª©ë¡ì€ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
 			return;
 		}
 
@@ -57,12 +57,12 @@ public class InvAPI {
 	}
 
 	public static Inventory createInv(PrefixPlayer pp, int index) {
-		Inventory inv = Bukkit.createInventory(null, 54, horusCode + pp.getName() + " ¡×b:" + index);
-		// 45°³ ´ÜÀ§·Î ²÷±è
+		Inventory inv = Bukkit.createInventory(null, 54, horusCode + pp.getName() + " Â§b:" + index);
+		// 45ê°œ ë‹¨ìœ„ë¡œ ëŠê¹€
 		List<String> list = pp.getList();
 		if (list.size() == 0 || index == 0) {
 			return null;
-		}// ¸®½ºÆ®°¡ 0, ÀÎµ¦½º°¡ 0
+		}// ë¦¬ìŠ¤íŠ¸ê°€ 0, ì¸ë±ìŠ¤ê°€ 0
 
 		if (list.size() > (index - 1) * 45) {
 			int start = (index - 1) * 45;
@@ -73,39 +73,39 @@ public class InvAPI {
 			for (int i = start; i <= end; i++) {
 				if (list.size() == i) {
 					break;
-				}// ¸®½ºÆ® ÃÖÁ¾ ÀÎµ¦½º +1 == ÇöÀç ÀÎµ¦½º
+				}// ë¦¬ìŠ¤íŠ¸ ìµœì¢… ì¸ë±ìŠ¤ +1 == í˜„ì¬ ì¸ë±ìŠ¤
 
 				lore = new ArrayList<String>();
-				lore.add("¡×r" + list.get(i));
+				lore.add("Â§r" + list.get(i));
 				ItemMeta imm = im.clone();
 				imm.setLore(lore);
-				imm.setDisplayName("¡×e" + (i) + "¹ø Â° ÄªÈ£");
+				imm.setDisplayName("Â§e" + (i) + "ë²ˆ ì§¸ ì¹­í˜¸");
 				ItemStack iss = is.clone();
 				iss.setItemMeta(imm);
 				inv.addItem(iss);
 
-			}// i´Â ÀÎµ¦½º ³Ñ¹ö, Ç¥±âÇÏ´Â ³Ñ¹ö ¾Æ´Ô
+			}// iëŠ” ì¸ë±ìŠ¤ ë„˜ë²„, í‘œê¸°í•˜ëŠ” ë„˜ë²„ ì•„ë‹˜
 
 			if (index > 1) {
 				inv.setItem(45, back);
-				// µÚ·Î°¡±â Ãß°¡
+				// ë’¤ë¡œê°€ê¸° ì¶”ê°€
 			} else {
 				ItemStack iss = main.clone();
 				ItemMeta imm = main.getItemMeta();
 				lore = new ArrayList<String>();
-				lore.add("¡×r<" + pp.getMainPrefix() + "¡×r>");
+				lore.add("Â§r<" + pp.getMainPrefix() + "Â§r>");
 				imm.setLore(lore);
 				iss.setItemMeta(imm);
 				inv.setItem(45, iss);
-			}// ¸ŞÀÎ ÄªÈ£ Ãß°¡
+			}// ë©”ì¸ ì¹­í˜¸ ì¶”ê°€
 
 			if (list.size() > index * 45) {
 				inv.setItem(53, next);
-			}// ´ÙÀ½ Ãß°¡
+			}// ë‹¤ìŒ ì¶”ê°€
 			return inv;
 		} else {
 			return null;
-		}// °³¼ö ÃÊ°ú
+		}// ê°œìˆ˜ ì´ˆê³¼
 
 	}
 }

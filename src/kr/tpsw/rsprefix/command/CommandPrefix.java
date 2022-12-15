@@ -19,23 +19,23 @@ public class CommandPrefix implements CommandExecutor {
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (!(sender instanceof Player)) {
-			sender.sendMessage("ÄÜ¼ÖÀº »ç¿ëÀÌ ºÒ°¡´ÉÇÑ ¸í·É¾îÀÔ´Ï´Ù.");
+			sender.sendMessage("ì½˜ì†”ì€ ì‚¬ìš©ì´ ë¶ˆê°€ëŠ¥í•œ ëª…ë ¹ì–´ì…ë‹ˆë‹¤.");
 			return true;
 		}
 		int len = args.length;
 		if (len == 0) {
 			if (label.equals("prefix")) {
-				sender.sendMessage("¡×6/prefix main <index> ¡×f-¸ŞÀÎ ÄªÈ£ ¼³Á¤");// gui¹ÌÁö¿ø
-				sender.sendMessage("¡×6/prefix main ¡×f-¸ŞÀÎ ÄªÈ£ º¸±â");// guiÁö¿ø
-				sender.sendMessage("¡×6/prefix list ¡×f-ÄªÈ£ ¸ñ·Ï º¸±â");// guiÁö¿ø
-				sender.sendMessage("¡×6/prefix gui ¡×f-¸ŞÀÎ ¸ñ·Ï gui·Î º¸±â");
+				sender.sendMessage("Â§6/prefix main <index> Â§f-ë©”ì¸ ì¹­í˜¸ ì„¤ì •");// guië¯¸ì§€ì›
+				sender.sendMessage("Â§6/prefix main Â§f-ë©”ì¸ ì¹­í˜¸ ë³´ê¸°");// guiì§€ì›
+				sender.sendMessage("Â§6/prefix list Â§f-ì¹­í˜¸ ëª©ë¡ ë³´ê¸°");// guiì§€ì›
+				sender.sendMessage("Â§6/prefix gui Â§f-ë©”ì¸ ëª©ë¡ guië¡œ ë³´ê¸°");
 			} else {
-				sender.sendMessage("¡×6/ÄªÈ£ ´ëÇ¥ <¹øÈ£> ¡×f-´ëÇ¥ ÄªÈ£ ¼³Á¤");// gui¹ÌÁö¿ø
-				sender.sendMessage("¡×6/ÄªÈ£ ´ëÇ¥ ¡×f-´ëÇ¥ ÄªÈ£ º¸±â");// guiÁö¿ø
-				sender.sendMessage("¡×6/ÄªÈ£ ¸ñ·Ï ¡×f-ÄªÈ£ ¸ñ·Ï º¸±â");// guiÁö¿ø
-				sender.sendMessage("¡×6/ÄªÈ£ gui ¡×f-¸ŞÀÎ ¸ñ·Ï gui·Î º¸±â");
+				sender.sendMessage("Â§6/ì¹­í˜¸ ëŒ€í‘œ <ë²ˆí˜¸> Â§f-ëŒ€í‘œ ì¹­í˜¸ ì„¤ì •");// guië¯¸ì§€ì›
+				sender.sendMessage("Â§6/ì¹­í˜¸ ëŒ€í‘œ Â§f-ëŒ€í‘œ ì¹­í˜¸ ë³´ê¸°");// guiì§€ì›
+				sender.sendMessage("Â§6/ì¹­í˜¸ ëª©ë¡ Â§f-ì¹­í˜¸ ëª©ë¡ ë³´ê¸°");// guiì§€ì›
+				sender.sendMessage("Â§6/ì¹­í˜¸ gui Â§f-ë©”ì¸ ëª©ë¡ guië¡œ ë³´ê¸°");
 			}
-		} else if ((args[0].equals("main") || args[0].equals("´ëÇ¥")) && (len == 1 || len == 2)) {
+		} else if ((args[0].equals("main") || args[0].equals("ëŒ€í‘œ")) && (len == 1 || len == 2)) {
 			PrefixPlayer pp = FileAPI.getPrefixPlayer(sender.getName());
 			if (len == 2) {
 				if (API.isIntegerPositive(args[1]) || args[1].equals("-1")) {
@@ -43,13 +43,13 @@ public class CommandPrefix implements CommandExecutor {
 					if (index == -1 || ObjectAPI.isListHasIndex(pp.getList(), index)) {
 						String main;
 						if (index == -1) {
-							main = "¾øÀ½";
+							main = "ì—†ìŒ";
 						} else {
 							main = pp.getList().get(index);
 						}
 						pp.setMainPrefix(index);
 						pp.needUpdateInv = true;
-						sender.sendMessage("¡×6´ëÇ¥ ÄªÈ£¸¦ ¡×r<" + main + "¡×r>¡×6(À¸)·Î ¼³Á¤Çß½À´Ï´Ù.");
+						sender.sendMessage("Â§6ëŒ€í‘œ ì¹­í˜¸ë¥¼ Â§r<" + main + "Â§r>Â§6(ìœ¼)ë¡œ ì„¤ì •í–ˆìŠµë‹ˆë‹¤.");
 
 						if (VaultHook.isChatHook) {
 							if (index == -1) {
@@ -61,26 +61,26 @@ public class CommandPrefix implements CommandExecutor {
 								VaultHook.chat.setPlayerSuffix((Player) sender, main);
 							}
 							
-						}//ÄªÈ£ ¼³Á¤2
+						}//ì¹­í˜¸ ì„¤ì •2
 
 					} else {
-						sender.sendMessage("¡×6ÄªÈ£ ¸ñ·ÏÀ» ¹ş¾î³­ ¼ıÀÚÀÔ´Ï´Ù.");
+						sender.sendMessage("Â§6ì¹­í˜¸ ëª©ë¡ì„ ë²—ì–´ë‚œ ìˆ«ìì…ë‹ˆë‹¤.");
 					}
 				} else {
-					sender.sendMessage("¡×6<index>¿¡ ¿Ã¹Ù¸¥ ¼ıÀÚ¸¦ ÀÔ·ÂÇÏ½Ê½Ã¿À.");
+					sender.sendMessage("Â§6<index>ì— ì˜¬ë°”ë¥¸ ìˆ«ìë¥¼ ì…ë ¥í•˜ì‹­ì‹œì˜¤.");
 				}
 			} else {
 				String main = pp.getMainPrefix();
-				sender.sendMessage("¡×6´ëÇ¥ ÄªÈ£´Â ¡×r<" + main + "¡×r>¡×6ÀÔ´Ï´Ù.");
+				sender.sendMessage("Â§6ëŒ€í‘œ ì¹­í˜¸ëŠ” Â§r<" + main + "Â§r>Â§6ì…ë‹ˆë‹¤.");
 			}
-		} else if ((args[0].equals("list") || args[0].equals("¸ñ·Ï")) && (len == 2 || len == 1)) {
+		} else if ((args[0].equals("list") || args[0].equals("ëª©ë¡")) && (len == 2 || len == 1)) {
 			PrefixPlayer pp = FileAPI.getPrefixPlayer(sender.getName());
 			int index = 1;
 			if (len == 2) {
 				if (API.isIntegerPositive(args[1])) {
 					index = Integer.valueOf(args[1]);
 				}
-			}// 2°³ ÀÎÀÚÀÏ °æ¿ì index µ¤¾î¾²±â
+			}// 2ê°œ ì¸ìì¼ ê²½ìš° index ë®ì–´ì“°ê¸°
 
 			API.sendMessageList(sender, pp.getList(), index, "prefix list");
 		} else if (args[0].equals("gui") && (len == 1 || len == 2)) {
@@ -89,11 +89,11 @@ public class CommandPrefix implements CommandExecutor {
 				if (API.isIntegerPositive(args[1])) {
 					index = Integer.valueOf(args[1]);
 				}
-			}// 2°³ ÀÎÀÚÀÏ °æ¿ì index µ¤¾î¾²±â
+			}// 2ê°œ ì¸ìì¼ ê²½ìš° index ë®ì–´ì“°ê¸°
 
 			InvAPI.viewInv(sender.getName(), (Player) sender, index);
 		} else {
-			sender.sendMessage("¡×6Àß¸øµÈ ¸í·É¾î ÀÎÀÚ¸¦ ÀÔ·ÂÇß½À´Ï´Ù.");
+			sender.sendMessage("Â§6ì˜ëª»ëœ ëª…ë ¹ì–´ ì¸ìë¥¼ ì…ë ¥í–ˆìŠµë‹ˆë‹¤.");
 		}
 		return true;
 	}
