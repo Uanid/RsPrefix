@@ -33,8 +33,8 @@ public class YamlConfiguration {
 	private Yaml yaml;
 	private Map<String, Object> map;
 
-	// CustomConfig3 ÃÖÁ¾º»(clearÃß°¡)
-	// CustomConfig3¿¡¼­ YamlConfigurationÀ¸·Î º¯°æ
+	// CustomConfig3 ìµœì¢…ë³¸(clearì¶”ê°€)
+	// CustomConfig3ì—ì„œ YamlConfigurationìœ¼ë¡œ ë³€ê²½
 	// 1.0
 
 	public YamlConfiguration(String file) {

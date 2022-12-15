@@ -1,4 +1,4 @@
-﻿package rsprefix.kr.tpsw.api.bukkit;
+package rsprefix.kr.tpsw.api.bukkit;
 
 import java.util.List;
 
@@ -13,7 +13,9 @@ public class API {
 		String[] ids = str.split(":");
 		int[] ii = { 0, 0 };
 		try {
-			if (API.isIntegerPositive(ids[0]) && Material.getMaterial(Integer.valueOf(ids[0])) != null) {
+			var id = Integer.valueOf(ids[0]);
+			// TODO: need update to MC 1.19 api
+			if (API.isIntegerPositive(ids[0]) && Material.getMaterial(null) != null) {
 				ii[0] = Integer.valueOf(ids[0]);
 				if (ids.length == 2 && API.isIntegerPositive(ids[1])) {
 					ii[1] = Short.valueOf(ids[1]);

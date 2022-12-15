@@ -22,10 +22,10 @@ public class PlayersAPI implements Listener {
 	private static final Set<Player> ONLINE = new HashSet<Player>();
 	private static final Set<OfflinePlayer> OFFLINE = new HashSet<OfflinePlayer>();
 
-	// PlayersAPI¹öÀü 1.1
-	// 1.0 - ÀÌ¸§ º¯°æ (BukkitAPI >> PlayersAPI)
-	// 1.1 - »ı¼ºÀÚ ¼öÁ¤
-	// 1.2 - ÁÖ¼® Áö¿ò
+	// PlayersAPIë²„ì „ 1.1
+	// 1.0 - ì´ë¦„ ë³€ê²½ (BukkitAPI >> PlayersAPI)
+	// 1.1 - ìƒì„±ì ìˆ˜ì •
+	// 1.2 - ì£¼ì„ ì§€ì›€
 
 	@SuppressWarnings("unchecked")
 	public static void initLoad(Plugin pl) {
@@ -36,17 +36,17 @@ public class PlayersAPI implements Listener {
 				for (Player p : pp) {
 					ONLINE.add(p);
 				}
-				// System.out.println("¹è¿­·Î ´Ş¸°´Ù");
+				// System.out.println("ë°°ì—´ë¡œ ë‹¬ë¦°ë‹¤");
 			} else if (obj instanceof Iterable<?>) {
 				Iterator<Player> pp = ((Iterable<Player>) obj).iterator();
 				while (pp.hasNext()) {
 					ONLINE.add(pp.next());
 				}
-				// System.out.println("iterable·Î ´Ş¸°´Ù");
+				// System.out.println("iterableë¡œ ë‹¬ë¦°ë‹¤");
 			} else {
 
 				// for (int i = 0; i < 10; i++) {
-				System.out.println("¿¹¿Ü¹ß»ı »©¾Ö¾Ö¾×!");
+				System.out.println("ì˜ˆì™¸ë°œìƒ ë¹¼ì• ì• ì•¡!");
 				// }
 			}
 
@@ -55,7 +55,7 @@ public class PlayersAPI implements Listener {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-		}// ÇÃ·¹ÀÌ¾î ¸ñ·Ï °¡Á®¿À±â
+		}// í”Œë ˆì´ì–´ ëª©ë¡ ê°€ì ¸ì˜¤ê¸°
 
 		Bukkit.getPluginManager().registerEvents(new Listener() {
 			@EventHandler
@@ -72,7 +72,7 @@ public class PlayersAPI implements Listener {
 			@EventHandler
 			public void onPlayerKick(PlayerKickEvent event) {
 				ONLINE.remove(event.getPlayer());
-			}// ¿©±â±îÁö °Çµå¸®¸é ¾ÈµÇ´Â ¸Ş¼­µå
+			}// ì—¬ê¸°ê¹Œì§€ ê±´ë“œë¦¬ë©´ ì•ˆë˜ëŠ” ë©”ì„œë“œ
 		}, pl);
 	}
 

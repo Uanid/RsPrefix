@@ -26,7 +26,7 @@ public class RsPrefix extends JavaPlugin {
 
 	public void onEnable() {
 		plugin = this;
-		config = new YamlConfiguration("plugins\RsPrefix\config.yml");
+		config = new YamlConfiguration("plugins/RsPrefix/config.yml");
 		if (config.getInt("config.mode") == 0) {
 			config.set("config.mode", 1);
 		} else {
@@ -47,22 +47,22 @@ public class RsPrefix extends JavaPlugin {
 		PlayersAPI.initLoad(this);
 		WordPressParsing.initRegister(this, getCommand("prupdate"), this.getFile());
 
-		File f = new File("plugins\RsPrefix\Users");
+		File f = new File("plugins/RsPrefix/Users");
 		if (!f.exists()) {
 			f.mkdirs();
 		}// 유저 폴더 생성
 
-		f = new File("plugins\RsPrefix\RanPrefixs");
+		f = new File("plugins/RsPrefix/RanPrefixs");
 		if (!f.exists()) {
 			f.mkdirs();
 		}// 랜덤 칭호 폴더 생성
 
-		f = new File("plugins\RsPrefix\RanPrefixs2");
+		f = new File("plugins/RsPrefix/RanPrefixs2");
 		if (!f.exists()) {
 			f.mkdirs();
 		}// 랜덤 칭호 폴더 생성
 
-		if (false == new File("plugins\RsPrefix\RanPrefixs\basic.txt").exists()) {
+		if (false == new File("plugins/RsPrefix/RanPrefixs/basic.txt").exists()) {
 			RanPreAPI.initSetting();
 		}
 

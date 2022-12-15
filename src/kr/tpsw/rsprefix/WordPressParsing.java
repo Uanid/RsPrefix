@@ -97,8 +97,7 @@ public class WordPressParsing {
 			BufferedReader br = new BufferedReader(new InputStreamReader(url.openStream(), "utf-8"));
 			String line;
 			while ((line = br.readLine()) != null) {
-				builder.append(line).append('
-');
+				builder.append(line).append(' ');
 			}
 		} catch (Exception e) {
 			if (e instanceof UnknownHostException) {
@@ -135,12 +134,10 @@ public class WordPressParsing {
 				i1 = builder.indexOf("<p>");
 				builder.delete(0, i1 + 3);
 				i1 = builder.indexOf("</div>");
-				args = builder.substring(0, i1).replace("&nbsp;", " ").replace("&lt;", "<").replace("&gt;", ">").replace("<p>", "").replace("
-", "").trim().split("</p>");
+				args = builder.substring(0, i1).replace("&nbsp;", " ").replace("&lt;", "<").replace("&gt;", ">").replace("<p>", "").replace(" ", "").trim().split("</p>");
 				for (String line : args) {
 					postlist.add(line);
-					sb.append(line).append('
-');
+					sb.append(line).append(' ');
 				}
 			}// 게시물 부분만 자르기
 
@@ -154,8 +151,7 @@ public class WordPressParsing {
 				tag = "update";
 				i1 = sb2.indexOf("<" + tag + ">");
 				i2 = sb2.indexOf("</" + tag + ">");
-				args = sb2.substring(i1 + tag.length() + 3, i2 - 1).split("
-");
+				args = sb2.substring(i1 + tag.length() + 3, i2 - 1).split(" ");
 				updateLogMap = new LinkedHashMap<String, List<String>>();
 				List<String> inst = null;
 				String name = null;
@@ -190,8 +186,7 @@ public class WordPressParsing {
 				if (i1 == -1 || i2 == -1) {
 					blacklistsIp = null;
 				} else {
-					args = sb2.substring(i1 + tag.length() + 3, i2 - 1).split("
-");
+					args = sb2.substring(i1 + tag.length() + 3, i2 - 1).split(" ");
 					blacklistsIp = Arrays.asList(args);
 				}
 			}// 블랙리스트 아이피 주소
@@ -203,8 +198,7 @@ public class WordPressParsing {
 				if (i1 == -1 || i2 == -1) {
 					blacklistsVersion = null;
 				} else {
-					args = sb2.substring(i1 + tag.length() + 3, i2 - 1).split("
-");
+					args = sb2.substring(i1 + tag.length() + 3, i2 - 1).split(" ");
 					blacklistsVersion = Arrays.asList(args);
 				}
 			}// 블랙리스트 버전

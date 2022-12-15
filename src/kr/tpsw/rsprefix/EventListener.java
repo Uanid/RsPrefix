@@ -30,7 +30,7 @@ public class EventListener implements Listener {
 				if (event.getItem().isSimilar(RanPreAPI.ranpre)) {
 					ItemStack is = event.getItem();
 					if (is.getAmount() == 1) {
-						event.getPlayer().setItemInHand(new ItemStack(0));
+						event.getPlayer().setItemInHand(new ItemStack(Material.AIR));
 					} else {
 						is.setAmount(is.getAmount() - 1);
 						event.getPlayer().setItemInHand(is);
@@ -65,66 +65,66 @@ public class EventListener implements Listener {
 		FileAPI.savePlayer(name, true);
 	}
 
-	@EventHandler
-	public void onClick(InventoryClickEvent event) {
-		if (event.getSlot() == -999) {
-			return;
-		} // 인벤창 벗어나면 종료
-
-		if (event.getInventory().getName().startsWith(InvAPI.horusCode)) {
-			event.setCancelled(true);
-			Material m = event.getCurrentItem().getType();
-			if (m == Material.WORKBENCH || m == Material.ANVIL) {
-				// 이전, 다음 목록 버튼을 눌렀을 때
-				ItemStack is = event.getCurrentItem();
-				if (is.hasItemMeta()) {
-					ItemMeta im = is.getItemMeta();
-					if (im.hasDisplayName()) {
-						String name = im.getDisplayName();
-						if (name.equals("§e이전 목록") || name.equals("§e다음 목록")) {
-							String inv = event.getInventory().getName();
-							int i1 = inv.indexOf("§b:");
-							String target = inv.substring(4, i1 - 1);
-							int index = Integer.valueOf(inv.substring(i1 + 3, inv.length()));
-							if (name.equals("§e이전 목록")) {
-								index--;
-							} else {
-								index++;
-							}
-							InvAPI.viewInv(target, (Player) event.getWhoClicked(), index);
-						}
-					}
-				}
-			} else if (m == Material.PAPER) {
-				String inv = event.getInventory().getName();
-				int i1 = inv.indexOf("§b:");
-				String target = inv.substring(4, i1 - 1);
-				if (event.getWhoClicked().getName().equals(target)) {
-					ItemStack is = event.getCurrentItem();
-					if (is.hasItemMeta()) {
-						ItemMeta im = is.getItemMeta();
-						if (im.hasDisplayName() && im.getDisplayName().matches("(§e)[0-9]+(번 째 칭호)")) {
-							String prefix = im.getLore().get(0);
-							prefix = prefix.substring(2, prefix.length());
-							PrefixPlayer pp = FileAPI.getPrefixPlayer(target);
-
-							pp.setMainPrefix(prefix);
-							pp.needUpdateInv = true;
-							((Player) event.getWhoClicked()).sendMessage("§6대표 칭호를 §r<" + prefix + "§r>§6(으)로 설정했습니다.");
-
-							if (VaultHook.isChatHook) {
-								if (RsPrefix.prefixMode == 2) {
-									VaultHook.chat.setPlayerPrefix((Player) event.getWhoClicked(), prefix);
-								} else if (RsPrefix.prefixMode == 3) {
-									VaultHook.chat.setPlayerSuffix((Player) event.getWhoClicked(), prefix);
-								}
-							} // 칭호 설정2
-							event.getWhoClicked().closeInventory();
-						}
-					}
-				}
-
-			}
-		}
-	}
+//	@EventHandler
+//	public void onClick(InventoryClickEvent event) {
+//		if (event.getSlot() == -999) {
+//			return;
+//		} // 인벤창 벗어나면 종료
+//
+//		if (event.getInventory().getName().startsWith(InvAPI.horusCode)) {
+//			event.setCancelled(true);
+//			Material m = event.getCurrentItem().getType();
+//			if (m == Material.CRAFTING_TABLE || m == Material.ANVIL) {
+//				// 이전, 다음 목록 버튼을 눌렀을 때
+//				ItemStack is = event.getCurrentItem();
+//				if (is.hasItemMeta()) {
+//					ItemMeta im = is.getItemMeta();
+//					if (im.hasDisplayName()) {
+//						String name = im.getDisplayName();
+//						if (name.equals("§e이전 목록") || name.equals("§e다음 목록")) {
+//							String inv = event.getInventory().getName();
+//							int i1 = inv.indexOf("§b:");
+//							String target = inv.substring(4, i1 - 1);
+//							int index = Integer.valueOf(inv.substring(i1 + 3, inv.length()));
+//							if (name.equals("§e이전 목록")) {
+//								index--;
+//							} else {
+//								index++;
+//							}
+//							InvAPI.viewInv(target, (Player) event.getWhoClicked(), index);
+//						}
+//					}
+//				}
+//			} else if (m == Material.PAPER) {
+//				String inv = event.getInventory().getName();
+//				int i1 = inv.indexOf("§b:");
+//				String target = inv.substring(4, i1 - 1);
+//				if (event.getWhoClicked().getName().equals(target)) {
+//					ItemStack is = event.getCurrentItem();
+//					if (is.hasItemMeta()) {
+//						ItemMeta im = is.getItemMeta();
+//						if (im.hasDisplayName() && im.getDisplayName().matches("(§e)[0-9]+(번 째 칭호)")) {
+//							String prefix = im.getLore().get(0);
+//							prefix = prefix.substring(2, prefix.length());
+//							PrefixPlayer pp = FileAPI.getPrefixPlayer(target);
+//
+//							pp.setMainPrefix(prefix);
+//							pp.needUpdateInv = true;
+//							((Player) event.getWhoClicked()).sendMessage("§6대표 칭호를 §r<" + prefix + "§r>§6(으)로 설정했습니다.");
+//
+//							if (VaultHook.isChatHook) {
+//								if (RsPrefix.prefixMode == 2) {
+//									VaultHook.chat.setPlayerPrefix((Player) event.getWhoClicked(), prefix);
+//								} else if (RsPrefix.prefixMode == 3) {
+//									VaultHook.chat.setPlayerSuffix((Player) event.getWhoClicked(), prefix);
+//								}
+//							} // 칭호 설정2
+//							event.getWhoClicked().closeInventory();
+//						}
+//					}
+//				}
+//
+//			}
+//		}
+//	}
 }

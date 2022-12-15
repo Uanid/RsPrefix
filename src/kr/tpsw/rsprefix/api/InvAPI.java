@@ -14,9 +14,9 @@ import rsprefix.kr.tpsw.api.publica.ObjectAPI;
 
 public class InvAPI {
 
-	private static ItemStack back = new ItemStack(Material.WORKBENCH);
+	private static ItemStack back = new ItemStack(Material.BEACON);
 	private static ItemStack next = new ItemStack(Material.ANVIL);
-	private static ItemStack main = new ItemStack(Material.ENCHANTMENT_TABLE);
+	private static ItemStack main = new ItemStack(Material.ENCHANTING_TABLE);
 	public static String horusCode = "§a§a";
 
 	static {

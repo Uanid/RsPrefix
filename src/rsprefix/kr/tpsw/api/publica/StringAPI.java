@@ -43,7 +43,7 @@ public class StringAPI {
 			return name.substring(0, index);
 		} else {
 			System.out.println(file.getAbsolutePath());
-			//Àß¸øµÈ ÆÄÀÏ, ¾Æ¸¶ ÀÌ ¸Ş¼­µå Àß¸øµÊ
+			//ì˜ëª»ëœ íŒŒì¼, ì•„ë§ˆ ì´ ë©”ì„œë“œ ì˜ëª»ë¨
 			return null;
 		}
 	}

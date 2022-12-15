@@ -113,11 +113,11 @@ public class RanPreAPI {
 		if (WordPressParsing.IS_DATA_PAGE_CONNETED) {
 			PrefixDownloader.saveNewRandomPrefixs();
 		} else {
-			saveNewPrefixs(new File("plugins\RsPrefix\RanPrefixs\basic.txt"), new String[] { "§f뉴비" });
-			saveNewPrefixs(new File("plugins\RsPrefix\RanPrefixs\classic.txt"), new String[] { "§f[초보자]" });
-			saveNewPrefixs(new File("plugins\RsPrefix\RanPrefixs\rare.txt"), new String[] { "§b[친절한]" });
-			saveNewPrefixs(new File("plugins\RsPrefix\RanPrefixs\epic.txt"), new String[] { "§f[§6에픽§f]" });
-			saveNewPrefixs(new File("plugins\RsPrefix\RanPrefixs\legendary.txt"), new String[] { "§a[§c서버마스터§a]" });
+			saveNewPrefixs(new File("plugins/RsPrefix/RanPrefixs/basic.txt"), new String[] { "§f뉴비" });
+			saveNewPrefixs(new File("plugins/RsPrefix/RanPrefixs/classic.txt"), new String[] { "§f[초보자]" });
+			saveNewPrefixs(new File("plugins/RsPrefix/RanPrefixs/rare.txt"), new String[] { "§b[친절한]" });
+			saveNewPrefixs(new File("plugins/RsPrefix/RanPrefixs/epic.txt"), new String[] { "§f[§6에픽§f]" });
+			saveNewPrefixs(new File("plugins/RsPrefix/RanPrefixs/legendary.txt"), new String[] { "§a[§c서버마스터§a]" });
 		}
 	}
 
@@ -126,8 +126,7 @@ public class RanPreAPI {
 			FileWriter fw = new FileWriter(f);
 			BufferedWriter bw = new BufferedWriter(fw);
 			for (String prefix : s) {
-				bw.write(prefix + "
-");
+				bw.write(prefix + " ");
 			}
 			bw.close();
 			fw.close();
@@ -137,19 +136,19 @@ public class RanPreAPI {
 	}
 
 	public static void initLoad() {
-		basic = getBuffered("plugins\RsPrefix\RanPrefixs\basic.txt");
-		classic = getBuffered("plugins\RsPrefix\RanPrefixs\classic.txt");
-		rare = getBuffered("plugins\RsPrefix\RanPrefixs\rare.txt");
-		epic = getBuffered("plugins\RsPrefix\RanPrefixs\epic.txt");
-		legendary = getBuffered("plugins\RsPrefix\RanPrefixs\legendary.txt");
+		basic = getBuffered("plugins/RsPrefix/RanPrefixs/basic.txt");
+		classic = getBuffered("plugins/RsPrefix/RanPrefixs/classic.txt");
+		rare = getBuffered("plugins/RsPrefix/RanPrefixs/rare.txt");
+		epic = getBuffered("plugins/RsPrefix/RanPrefixs/epic.txt");
+		legendary = getBuffered("plugins/RsPrefix/RanPrefixs/legendary.txt");
 	}
 
 	public static void initSave() {
-		saveBuffered(basic, "plugins\RsPrefix\RanPrefixs\basic.txt");
-		saveBuffered(classic, "plugins\RsPrefix\RanPrefixs\classic.txt");
-		saveBuffered(rare, "plugins\RsPrefix\RanPrefixs\rare.txt");
-		saveBuffered(epic, "plugins\RsPrefix\RanPrefixs\epic.txt");
-		saveBuffered(legendary, "plugins\RsPrefix\RanPrefixs\legendary.txt");
+		saveBuffered(basic, "plugins/RsPrefix/RanPrefixs/basic.txt");
+		saveBuffered(classic, "plugins/RsPrefix/RanPrefixs/classic.txt");
+		saveBuffered(rare, "plugins/RsPrefix/RanPrefixs/rare.txt");
+		saveBuffered(epic, "plugins/RsPrefix/RanPrefixs/epic.txt");
+		saveBuffered(legendary, "plugins/RsPrefix/RanPrefixs/legendary.txt");
 	}
 
 	private static String getRan(List<String> list) {
@@ -222,7 +221,7 @@ public class RanPreAPI {
 
 		@SuppressWarnings("unchecked")
 		public void loadMap() {
-			File f = new File("plugins\RsPrefix\RanPrefixs2\" + this.name() + ".ser");
+			File f = new File("plugins/RsPrefix/RanPrefixs2/" + this.name() + ".ser");
 			if (f.exists())
 				try {
 					ObjectInputStream ois = new ObjectInputStream(new FileInputStream(f));
@@ -235,7 +234,7 @@ public class RanPreAPI {
 
 		public void saveMap() {
 			try {
-				ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(new File("plugins\RsPrefix\RanPrefixs2\" + this.name() + ".ser")));
+				ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(new File("plugins/RsPrefix/RanPrefixs2/" + this.name() + ".ser")));
 				oos.writeObject(map);
 				oos.close();
 			} catch (Exception e) {
@@ -295,8 +294,7 @@ public class RanPreAPI {
 			File file = new File(path);
 			BufferedWriter bw = new BufferedWriter(new FileWriter(file));
 			for (String s : list) {
-				bw.write(s + "
-");
+				bw.write(s + " ");
 			}
 			bw.close();
 		} catch (Exception e) {

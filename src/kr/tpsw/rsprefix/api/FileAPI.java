@@ -34,13 +34,13 @@ public class FileAPI {
 	}
 
 	public static void loadPlayer(String name) {
-		File file = new File("plugins\RsPrefix\users\" + name + ".yml");
+		File file = new File("plugins/RsPrefix/users/" + name + ".yml");
 		boolean firstaccess = false;
 		if (!file.exists()) {
 			firstaccess = true;
 		}// 처음 접속
 
-		YamlConfiguration user = new YamlConfiguration("plugins\RsPrefix\users\" + name + ".yml");
+		YamlConfiguration user = new YamlConfiguration("plugins/RsPrefix/users/" + name + ".yml");
 		List<String> list = user.getStringList("list");
 		String main = user.getString("main");
 		PrefixPlayer pp = new PrefixPlayer(name, list, main);
@@ -60,7 +60,7 @@ public class FileAPI {
 	}
 
 	public static void savePlayer(String name, boolean removePlayer) {
-		YamlConfiguration user = new YamlConfiguration("plugins\RsPrefix\users\" + name + ".yml");
+		YamlConfiguration user = new YamlConfiguration("plugins/RsPrefix/users/" + name + ".yml");
 		PrefixPlayer pp = map.get(name);
 		user.set("list", pp.getList());
 		user.set("main", pp.getMainPrefix());

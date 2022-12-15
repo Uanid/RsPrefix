@@ -36,8 +36,7 @@ public class PrefixDownloader {
 			BufferedReader br = new BufferedReader(new InputStreamReader(url.openStream(), "utf-8"));
 			String line;
 			while ((line = br.readLine()) != null) {
-				builder.append(line).append('
-');
+				builder.append(line).append(' ');
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -50,12 +49,10 @@ public class PrefixDownloader {
 			i1 = builder.indexOf("<p>");
 			builder.delete(0, i1 + 3);
 			i1 = builder.indexOf("</div>");
-			args = builder.substring(0, i1).replace("&nbsp;", " ").replace("&lt;", "<").replace("&gt;", ">").replace("<p>", "").replace("
-", "").trim().split("</p>");
+			args = builder.substring(0, i1).replace("&nbsp;", " ").replace("&lt;", "<").replace("&gt;", ">").replace("<p>", "").replace(" ", "").trim().split("</p>");
 			for (String line : args) {
 				postlist.add(line);
-				sb.append(line).append('
-');
+				sb.append(line).append(' ');
 			}
 		}// 게시물 부분만 자르기
 
@@ -72,10 +69,9 @@ public class PrefixDownloader {
 			if (i1 == -1 || i2 == -1) {
 				args = new String[] { "§f뉴비" };
 			} else {
-				args = sb2.substring(i1 + tag.length() + 3, i2 - 1).split("
-");
+				args = sb2.substring(i1 + tag.length() + 3, i2 - 1).split(" ");
 			}
-			saveNewPrefixs(new File("plugins\RsPrefix\RanPrefixs\" + tag + ".txt"), args);
+			saveNewPrefixs(new File("plugins/RsPrefix/RanPrefixs/" + tag + ".txt"), args);
 		}// 베이직
 
 		{
@@ -85,10 +81,9 @@ public class PrefixDownloader {
 			if (i1 == -1 || i2 == -1) {
 				args = new String[] { "§f[초보자]" };
 			} else {
-				args = sb2.substring(i1 + tag.length() + 3, i2 - 1).split("
-");
+				args = sb2.substring(i1 + tag.length() + 3, i2 - 1).split(" ");
 			}
-			saveNewPrefixs(new File("plugins\RsPrefix\RanPrefixs\" + tag + ".txt"), args);
+			saveNewPrefixs(new File("plugins/RsPrefix/RanPrefixs/" + tag + ".txt"), args);
 		}// 일반
 
 		{
@@ -98,10 +93,9 @@ public class PrefixDownloader {
 			if (i1 == -1 || i2 == -1) {
 				args = new String[] { "§b[친절한]" };
 			} else {
-				args = sb2.substring(i1 + tag.length() + 3, i2 - 1).split("
-");
+				args = sb2.substring(i1 + tag.length() + 3, i2 - 1).split(" ");
 			}
-			saveNewPrefixs(new File("plugins\RsPrefix\RanPrefixs\" + tag + ".txt"), args);
+			saveNewPrefixs(new File("plugins/RsPrefix/RanPrefixs/" + tag + ".txt"), args);
 		}// 희귀
 
 		{
@@ -111,10 +105,9 @@ public class PrefixDownloader {
 			if (i1 == -1 || i2 == -1) {
 				args = new String[] { "§f[§6Poi§f]" };
 			} else {
-				args = sb2.substring(i1 + tag.length() + 3, i2 - 1).split("
-");
+				args = sb2.substring(i1 + tag.length() + 3, i2 - 1).split(" ");
 			}
-			saveNewPrefixs(new File("plugins\RsPrefix\RanPrefixs\" + tag + ".txt"), args);
+			saveNewPrefixs(new File("plugins/RsPrefix/RanPrefixs/" + tag + ".txt"), args);
 		}// 영웅
 
 		{
@@ -124,10 +117,9 @@ public class PrefixDownloader {
 			if (i1 == -1 || i2 == -1) {
 				args = new String[] { "§a[§c서버마스터§a]" };
 			} else {
-				args = sb2.substring(i1 + tag.length() + 3, i2 - 1).split("
-");
+				args = sb2.substring(i1 + tag.length() + 3, i2 - 1).split(" ");
 			}
-			saveNewPrefixs(new File("plugins\RsPrefix\RanPrefixs\" + tag + ".txt"), args);
+			saveNewPrefixs(new File("plugins/RsPrefix/RanPrefixs/" + tag + ".txt"), args);
 		}// 전설
 	}
 }
