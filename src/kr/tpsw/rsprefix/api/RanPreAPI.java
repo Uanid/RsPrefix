@@ -56,15 +56,14 @@ public class RanPreAPI {
     }
 
     public static void runRandomPrefix(Player sender) {
-        PrefixPlayer pp = FileAPI.getPrefixPlayer(sender.getName());
+        PrPlayer pp = FileAPI.getPrefixPlayer(sender.getName());
         int i = RanPreAPI.getRanClass(sender.getName());
         if (i == 1) {// 일반
             String pre = getRan(classic);
-            List<String> list = pp.getList();
+            List<String> list = pp.getTitles();
             if (!list.contains(pre)) {
                 list.add(pre);
             }
-            pp.needUpdateInv = true;
             if (RsPrefix.useRandomPrefixBroadCast) {
                 Bukkit.broadcastMessage("§e" + sender.getName() + "님이 §f일반 §r<" + pre + "§r> §e칭호를 획득했습니다");
             } else {
@@ -72,11 +71,10 @@ public class RanPreAPI {
             }
         } else if (i == 2) {// 희귀
             String pre = getRan(rare);
-            List<String> list = pp.getList();
+            List<String> list = pp.getTitles();
             if (!list.contains(pre)) {
                 list.add(pre);
             }
-            pp.needUpdateInv = true;
             if (RsPrefix.useRandomPrefixBroadCast) {
                 Bukkit.broadcastMessage("§e" + sender.getName() + "님이 §b희귀 §r<" + pre + "§r> §e칭호를 획득했습니다!");
             } else {
@@ -84,11 +82,10 @@ public class RanPreAPI {
             }
         } else if (i == 3) {// 영웅
             String pre = getRan(epic);
-            List<String> list = pp.getList();
+            List<String> list = pp.getTitles();
             if (!list.contains(pre)) {
                 list.add(pre);
             }
-            pp.needUpdateInv = true;
             if (RsPrefix.useRandomPrefixBroadCast) {
                 Bukkit.broadcastMessage("§e와우 " + sender.getName() + "님이 §6에픽 §r<" + pre + "§r> §e칭호를 획득했습니다!");
             } else {
@@ -96,11 +93,10 @@ public class RanPreAPI {
             }
         } else if (i == 4) {// 전설
             String pre = getRan(legendary);
-            List<String> list = pp.getList();
+            List<String> list = pp.getTitles();
             if (!list.contains(pre)) {
                 list.add(pre);
             }
-            pp.needUpdateInv = true;
             Bukkit.broadcastMessage("§e와우! §c" + sender.getName() + "§e님이 §f[§6전설§f] §r<" + pre + "§r> §e칭호를 획득했습니다!");
             // sender.sendMessage("§e와우! §6전설 §r< " + pre + "§r> §e칭호입니다!");
         } else {

@@ -12,10 +12,10 @@ import rsprefix2.kr.tpsw.api.publica.YamlConfiguration;
 
 public class FileAPI {
 
-	private static final Map<String, PrefixPlayer> map = new HashMap<String, PrefixPlayer>();
+	private static final Map<String, PrPlayer> container = new HashMap<>();
 
 	public static boolean isLoadedPlayer(String name) {
-		return map.containsKey(name);
+		return container.containsKey(name);
 	}
 
 	public static void initLoad() {
@@ -27,10 +27,10 @@ public class FileAPI {
 	}
 
 	public static void endSave() {
-		for (String name : map.keySet()) {
+		for (String name : container.keySet()) {
 			savePlayer(name, false);
 		}
-		map.clear();
+		container.clear();
 	}
 
 	public static void loadPlayer(String name) {
@@ -43,10 +43,10 @@ public class FileAPI {
 		YamlConfiguration user = new YamlConfiguration("plugins/RsPrefix/users/" + name + ".yml");
 		List<String> list = user.getStringList("list");
 		String main = user.getString("main");
-		PrefixPlayer pp = new PrefixPlayer(name, list, main);
-		map.put(name, pp);
+		PrPlayer pp = new PrPlayer(name, list, main);
+		container.put(name, pp);
 		if (firstaccess) {
-			List<String> li = pp.getList();
+			List<String> li = pp.getTitles();
 			if (li == null || li.size() == 0 || li.get(0).equals("#null")) {
 				// 리스트 비어있거나 #null이면
 			} else {
@@ -55,22 +55,20 @@ public class FileAPI {
 				}
 			}
 		}
-		pp.updateInvList();
-
 	}
 
 	public static void savePlayer(String name, boolean removePlayer) {
 		YamlConfiguration user = new YamlConfiguration("plugins/RsPrefix/users/" + name + ".yml");
-		PrefixPlayer pp = map.get(name);
-		user.set("list", pp.getList());
-		user.set("main", pp.getMainPrefix());
+		PrPlayer pp = container.get(name);
+		user.set("list", pp.getTitles());
+		user.set("main", pp.getRepresentativeTitle());
 		user.saveYaml();
 		if (removePlayer)
-			map.remove(name);
+			container.remove(name);
 	}// 자체 언로드 기능 포함
 
-	public static PrefixPlayer getPrefixPlayer(String name) {
-		return map.get(name);
+	public static PrPlayer getPrefixPlayer(String name) {
+		return container.get(name);
 	}
 
 }

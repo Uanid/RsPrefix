@@ -4,11 +4,11 @@ import java.io.File;
 
 import kr.tpsw.rsprefix.api.FileAPI;
 import kr.tpsw.rsprefix.api.RanPreAPI;
-import kr.tpsw.rsprefix.api.RanPreAPI.Pclass;
 import kr.tpsw.rsprefix.command.CommandPrAdmin;
 import kr.tpsw.rsprefix.command.CommandPrefix;
 import kr.tpsw.rsprefix.command.CommandRsPrefix;
 
+import kr.tpsw.rsprefix.enums.DisplayMode;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -21,7 +21,7 @@ public class RsPrefix extends JavaPlugin {
 
 	public static boolean useRandomPrefixBroadCast = true;
 	public static YamlConfiguration config;
-	public static int prefixMode = 1;
+	public static DisplayMode displayMode = DisplayMode.DEFAULT;
 	public static Plugin plugin;
 
 	public void onEnable() {
@@ -30,7 +30,7 @@ public class RsPrefix extends JavaPlugin {
 		if (config.getInt("config.mode") == 0) {
 			config.set("config.mode", 1);
 		} else {
-			prefixMode = config.getInt("config.mode");
+			displayMode = DisplayMode.valueOf(config.getInt("config.mode"));
 		}
 
 		if (config.isBoolean("config.UseRandomPrefixBroadcast")) {
@@ -38,7 +38,7 @@ public class RsPrefix extends JavaPlugin {
 		} else {
 			config.set("config.UseRandomPrefixBroadcast", true);
 		}
-		
+
 		getCommand("prefix").setExecutor(new CommandPrefix());
 		getCommand("preadmin").setExecutor(new CommandPrAdmin());
 		getCommand("rsprefix").setExecutor(new CommandRsPrefix());

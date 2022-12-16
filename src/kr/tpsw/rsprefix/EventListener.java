@@ -1,9 +1,10 @@
 package kr.tpsw.rsprefix;
 
 import kr.tpsw.rsprefix.api.FileAPI;
-import kr.tpsw.rsprefix.api.PrefixPlayer;
+import kr.tpsw.rsprefix.api.PrPlayer;
 import kr.tpsw.rsprefix.api.RanPreAPI;
 
+import kr.tpsw.rsprefix.enums.DisplayMode;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -37,10 +38,10 @@ public class EventListener implements Listener {
 
 	@EventHandler
 	public void onChat(AsyncPlayerChatEvent event) {
-		if (RsPrefix.prefixMode == 1) {
-			PrefixPlayer pp = FileAPI.getPrefixPlayer(event.getPlayer().getName());
-			if (pp.getMainPrefix().length() != 0) {
-				event.setFormat(pp.getMainPrefix() + " §r" + event.getFormat());
+		if (RsPrefix.displayMode == DisplayMode.DEFAULT) {
+			PrPlayer pp = FileAPI.getPrefixPlayer(event.getPlayer().getName());
+			if (pp.getRepresentativeTitle().length() != 0) {
+				event.setFormat(pp.getRepresentativeTitle() + " §r" + event.getFormat());
 			}
 		}
 	}

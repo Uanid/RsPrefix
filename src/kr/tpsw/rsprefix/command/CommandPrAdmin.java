@@ -4,10 +4,10 @@ import java.util.List;
 
 import kr.tpsw.rsprefix.RsPrefix;
 import kr.tpsw.rsprefix.api.FileAPI;
-import kr.tpsw.rsprefix.api.InvAPI;
-import kr.tpsw.rsprefix.api.PrefixPlayer;
+import kr.tpsw.rsprefix.api.PrPlayer;
 import kr.tpsw.rsprefix.api.RanPreAPI;
 
+import kr.tpsw.rsprefix.enums.DisplayMode;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -62,8 +62,8 @@ public class CommandPrAdmin implements CommandExecutor {
 				isLoaded = false;
 			}// 유저 로그아웃일 때 데이터 로드
 
-			PrefixPlayer pp = FileAPI.getPrefixPlayer(target);
-			List<String> list = pp.getList();
+			PrPlayer pp = FileAPI.getPrefixPlayer(target);
+			List<String> list = pp.getTitles();
 
 			boolean isLastNo = args[args.length - 1].equals("no!");
 			String prefix;
@@ -76,7 +76,6 @@ public class CommandPrAdmin implements CommandExecutor {
 			prefix = prefix.replace("&", "§");
 			if (!list.contains(prefix)) {
 				list.add(prefix);
-				pp.needUpdateInv = true;
 			}
 
 			if (!isLoaded) {
@@ -100,20 +99,19 @@ public class CommandPrAdmin implements CommandExecutor {
 				return true;
 			}
 
-			PrefixPlayer pp = FileAPI.getPrefixPlayer(target);
+			PrPlayer pp = FileAPI.getPrefixPlayer(target);
 			int index = 1;
 			if (API.isIntegerPositive(args[2])) {
 				index = Integer.valueOf(args[2]);
 			}
 
-			List<String> list = pp.getList();
+			List<String> list = pp.getTitles();
 			if (ObjectAPI.isListHasIndex(list, index)) {
 				list.remove(index);
 			} else {
 				sender.sendMessage("§6칭호 목록을 벗어난 숫자입니다.");
 				return true;
 			}// 칭호 삭제
-			pp.needUpdateInv = true;
 
 			if (len == 4 && args[3].equals("노!")) {
 				return true;
@@ -131,7 +129,7 @@ public class CommandPrAdmin implements CommandExecutor {
 				return true;
 			}
 
-			PrefixPlayer pp = FileAPI.getPrefixPlayer(target);
+			PrPlayer pp = FileAPI.getPrefixPlayer(target);
 			int index = 1;
 			if (len == 3) {
 				if (API.isIntegerPositive(args[2])) {
@@ -139,22 +137,8 @@ public class CommandPrAdmin implements CommandExecutor {
 				}
 			}// 3개 인자일 경우 index 덮어쓰기
 
-			API.sendMessageList(sender, pp.getList(), index, "pradmin view");
-		} else if (args[0].equals("gui") && (len == 2 || len == 3)) {
-			String target = PlayersAPI.findOfflinePlayerName(args[1]);
-			if (target == null) {
-				sender.sendMessage("§6해당 이름으로 검색된 유저가 없습니다.");
-				return true;
-			}
-
-			int index = 1;
-			if (len == 3) {
-				if (API.isIntegerPositive(args[2])) {
-					index = Integer.valueOf(args[2]);
-				}
-			}// 2개 인자일 경우 index 덮어쓰기
-			InvAPI.viewInv(target, (Player) sender, index);
-		} else if ((args[0].equals("addran") || args[0].equals("랜덤추가")) && len >= 3) {
+			API.sendMessageList(sender, pp.getTitles(), index, "pradmin view");
+		}  else if ((args[0].equals("addran") || args[0].equals("랜덤추가")) && len >= 3) {
 			if (RanPreAPI.isRanpreClass(args[1])) {
 				List<String> ranpre = RanPreAPI.getRanpreList(args[1]);
 				String prefix = StringAPI.mergeArgs(args, 2).replace("&", "§");
@@ -165,17 +149,17 @@ public class CommandPrAdmin implements CommandExecutor {
 			}
 		} else if ((args[0].equals("mode") || args[0].equals("모드")) && len == 2) {
 			if (args[1].equals("default") || args[1].equals("기본")) {
-				RsPrefix.config.set("config.mode", 1);
-				RsPrefix.prefixMode = 1;
+				RsPrefix.config.set("config.mode", DisplayMode.DEFAULT.getIndex());
+				RsPrefix.displayMode = DisplayMode.DEFAULT;
 				sender.sendMessage("§6해당 모드 사용 가능 여부: §btrue");
 			} else if (args[1].equals("prefix") || args[1].equals("접두사")) {
-				RsPrefix.config.set("config.mode", 2);
-				RsPrefix.prefixMode = 2;
+				RsPrefix.config.set("config.mode", DisplayMode.PREFIX.getIndex());
+				RsPrefix.displayMode = DisplayMode.PREFIX;
 				sender.sendMessage("§6해당 모드 사용 가능 여부: " + (VaultHook.isChatHook ? "§btrue" : "§cfalse"));
 			} else if (args[1].equals("suffix") || args[1].equals("접미사")) {
-				RsPrefix.config.set("config.mode", 3);
+				RsPrefix.config.set("config.mode", DisplayMode.SUFFIX.getIndex());
+				RsPrefix.displayMode = DisplayMode.SUFFIX;
 				sender.sendMessage("§6해당 모드 사용 가능 여부: " + (VaultHook.isChatHook ? "§btrue" : "§cfalse"));
-				RsPrefix.prefixMode = 3;
 			} else {
 				sender.sendMessage("§6올바른 모드 타입을 입력하십시오.");
 				return true;
