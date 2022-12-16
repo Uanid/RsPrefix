@@ -14,7 +14,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import rsprefix2.kr.tpsw.api.bukkit.API;
-import rsprefix2.kr.tpsw.api.bukkit.PlayersAPI;
+import kr.tpsw.rsprefix.services.BukkitPlayersService;
 import rsprefix2.kr.tpsw.api.bukkit.VaultHook;
 import rsprefix2.kr.tpsw.api.publica.ObjectAPI;
 import rsprefix2.kr.tpsw.api.publica.StringAPI;
@@ -50,7 +50,7 @@ public class CommandPrAdmin implements CommandExecutor {
 			}
 
 		} else if ((args[0].equals("give") || args[0].equals("주기")) && len >= 3) {
-			String target = PlayersAPI.findOfflinePlayerName(args[1]);
+			String target = BukkitPlayersService.findOfflinePlayerName(args[1]);
 			if (target == null) {
 				sender.sendMessage("§6해당 이름으로 검색된 유저가 없습니다.");
 				return true;
@@ -88,7 +88,7 @@ public class CommandPrAdmin implements CommandExecutor {
 			sender.sendMessage("§6" + target + " 유저에 " + prefix + "§6칭호를 추가했습니다.");
 
 		} else if ((args[0].equals("remove") || args[0].equals("삭제")) && (len == 3 || len == 4)) {
-			String target = PlayersAPI.findOfflinePlayerName(args[1]);
+			String target = BukkitPlayersService.findOfflinePlayerName(args[1]);
 			if (target == null) {
 				sender.sendMessage("§6해당 이름으로 검색된 유저가 없습니다.");
 				return true;
@@ -118,7 +118,7 @@ public class CommandPrAdmin implements CommandExecutor {
 			}// 노!
 			sender.sendMessage("§6" + target + " 유저의 " + args[2] + "§6번째 칭호를 삭제했습니다.");
 		} else if ((args[0].equals("view") || args[0].equals("보기")) && (len == 3 || len == 2)) {
-			String target = PlayersAPI.findOfflinePlayerName(args[1]);
+			String target = BukkitPlayersService.findOfflinePlayerName(args[1]);
 			if (target == null) {
 				sender.sendMessage("§6해당 이름으로 검색된 유저가 없습니다.");
 				return true;

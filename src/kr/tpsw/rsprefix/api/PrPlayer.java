@@ -2,27 +2,27 @@ package kr.tpsw.rsprefix.api;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import rsprefix2.kr.tpsw.api.publica.ObjectAPI;
 
 public class PrPlayer {
 
-	private String name;
+	private UUID uuid;
 	private List<String> titles;
 	private String representativeTitle;
-
 	public PrPlayer(String name) {
-		this(name, new ArrayList<>(), null);
 	}
 
-	public PrPlayer(String name, List<String> titles, String representativeTitle) {
-		this.name = name;
+	public PrPlayer(@NotNull UUID uuid, @NotNull List<String> titles, @Nullable String representativeTitle) {
 		this.titles = titles;
 		this.representativeTitle = representativeTitle;
 	}
 
-	public String getName() {
-		return name;
+	public UUID getUuid() {
+		return uuid;
 	}
 
 	public List<String> getTitles() {
@@ -44,14 +44,6 @@ public class PrPlayer {
 	public void setRepresentativeTitle(int index) {
 		if (ObjectAPI.isListHasIndex(titles, index)) {
 			representativeTitle = titles.get(index);
-		} else {
-			representativeTitle = null;
-		}
-	}
-
-	public void setMainPrefix(String prefix) {
-		if (titles.contains(prefix)) {
-			representativeTitle = prefix;
 		} else {
 			representativeTitle = null;
 		}

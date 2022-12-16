@@ -9,8 +9,7 @@ import java.util.UUID;
 
 public class PrPlayerService {
 
-    private final Map<String, PrPlayer> container = new HashMap<>();
-    private final Map<UUID, PrPlayer> container2 = new HashMap<>();
+    private final Map<UUID, PrPlayer> players = new HashMap<>();
 
     private Server server;
 
@@ -18,13 +17,7 @@ public class PrPlayerService {
         this.server = server;
     }
 
-    public boolean isLoadedPlayer(String name) {
-        return container.containsKey(name);
+    public void addPrPlayer(PrPlayer player) {
+        this.players.put(player.getUuid(), player);
     }
-
-    public boolean isLoadedPlayer(UUID uuid) {
-        return container2.containsKey(uuid);
-    }
-
-
 }

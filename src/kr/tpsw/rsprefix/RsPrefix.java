@@ -3,17 +3,20 @@ package kr.tpsw.rsprefix;
 import java.io.File;
 
 import kr.tpsw.rsprefix.api.FileAPI;
+import kr.tpsw.rsprefix.api.PrPlayer;
 import kr.tpsw.rsprefix.api.RanPreAPI;
 import kr.tpsw.rsprefix.command.CommandPrAdmin;
 import kr.tpsw.rsprefix.command.CommandPrefix;
 import kr.tpsw.rsprefix.command.CommandRsPrefix;
 
 import kr.tpsw.rsprefix.enums.DisplayMode;
+import kr.tpsw.rsprefix.services.PrPlayerService;
 import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import rsprefix2.kr.tpsw.api.bukkit.PlayersAPI;
+import kr.tpsw.rsprefix.services.BukkitPlayersService;
 import rsprefix2.kr.tpsw.api.bukkit.VaultHook;
 import rsprefix2.kr.tpsw.api.publica.YamlConfiguration;
 
@@ -39,17 +42,29 @@ public class RsPrefix extends JavaPlugin {
 			config.set("config.UseRandomPrefixBroadcast", true);
 		}
 
+		var bkPlayerService = new BukkitPlayersService(this.getServer(), Bukkit.getPluginManager(), this);
+		var prPlayerService = new PrPlayerService(this.getServer());
+
+
+		var dataDir = this.getDataFolder();
+		var userDir = new File(dataDir, "users");
+		if (!userDir.exists()) {
+			userDir.mkdirs();
+		}// 유저 폴더 생성
+
+		var fileAPI = new FileAPI(userDir);
+		for (OfflinePlayer player : bkPlayerService.getOfflinePlayers()) {
+			prPlayerService.addPrPlayer(fileAPI.loadPrPlayer(player.getUniqueId()));
+		}
+
 		getCommand("prefix").setExecutor(new CommandPrefix());
 		getCommand("preadmin").setExecutor(new CommandPrAdmin());
 		getCommand("rsprefix").setExecutor(new CommandRsPrefix());
 		Bukkit.getPluginManager().registerEvents(new EventListener(), this);
 
-		PlayersAPI.initLoad(this);
 
 		File f = new File("plugins/RsPrefix/Users");
-		if (!f.exists()) {
-			f.mkdirs();
-		}// 유저 폴더 생성
+
 
 		f = new File("plugins/RsPrefix/RanPrefixs");
 		if (!f.exists()) {
@@ -61,7 +76,6 @@ public class RsPrefix extends JavaPlugin {
 		}
 
 		RanPreAPI.initLoad();
-		FileAPI.initLoad();// 접속즁인 유저 데이터 로드
 
 		VaultHook.hookSetup();
 		System.out.println("[RsPrefix] Vault 연동 여부: " + VaultHook.isVaulthooked);
