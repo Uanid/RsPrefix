@@ -1,4 +1,4 @@
-package rsprefix.kr.tpsw.api.publica;
+package rsprefix2.kr.tpsw.api.publica;
 
 import java.lang.reflect.Array;
 import java.math.BigDecimal;

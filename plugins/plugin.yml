@@ -1,0 +1,18 @@
+﻿name: RsPrefix
+version: 1.10
+main: kr.tpsw.rsprefix.RsPrefix
+author: Uanid
+softdepend: [Vault]
+api-version: '1.19'
+
+commands:
+    prefix:
+        aliases: [칭호]
+        description: 'A Command for Server Users'
+    preadmin:
+        aliases: [칭호관리]
+        description: 'A Command for Server Admin'
+        permission: 'rsprefix.admin'
+    rsprefix:
+        aliases: [알피지칭호]
+        description: 'About Plugin Information'

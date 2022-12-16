@@ -10,7 +10,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import rsprefix.kr.tpsw.api.publica.ObjectAPI;
+import rsprefix2.kr.tpsw.api.publica.ObjectAPI;
 
 public class InvAPI {
 

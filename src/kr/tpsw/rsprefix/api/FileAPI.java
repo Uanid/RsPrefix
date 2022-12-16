@@ -7,8 +7,8 @@ import java.util.Map;
 
 import org.bukkit.entity.Player;
 
-import rsprefix.kr.tpsw.api.bukkit.PlayersAPI;
-import rsprefix.kr.tpsw.api.publica.YamlConfiguration;
+import rsprefix2.kr.tpsw.api.bukkit.PlayersAPI;
+import rsprefix2.kr.tpsw.api.publica.YamlConfiguration;
 
 public class FileAPI {
 

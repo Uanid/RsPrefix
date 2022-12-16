@@ -13,11 +13,11 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import rsprefix.kr.tpsw.api.bukkit.API;
-import rsprefix.kr.tpsw.api.bukkit.PlayersAPI;
-import rsprefix.kr.tpsw.api.bukkit.VaultHook;
-import rsprefix.kr.tpsw.api.publica.ObjectAPI;
-import rsprefix.kr.tpsw.api.publica.StringAPI;
+import rsprefix2.kr.tpsw.api.bukkit.API;
+import rsprefix2.kr.tpsw.api.bukkit.PlayersAPI;
+import rsprefix2.kr.tpsw.api.bukkit.VaultHook;
+import rsprefix2.kr.tpsw.api.publica.ObjectAPI;
+import rsprefix2.kr.tpsw.api.publica.StringAPI;
 
 public class CommandPrAdmin implements CommandExecutor {
 

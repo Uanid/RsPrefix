@@ -1,4 +1,4 @@
-package rsprefix.kr.tpsw.api.bukkit;
+package rsprefix2.kr.tpsw.api.bukkit;
 
 import java.util.List;
 
