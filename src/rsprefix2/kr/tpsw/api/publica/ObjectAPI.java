@@ -1,4 +1,4 @@
-package rsprefix.kr.tpsw.api.publica;
+package rsprefix2.kr.tpsw.api.publica;
 
 import java.lang.reflect.Array;
 import java.math.BigDecimal;
@@ -20,7 +20,7 @@ public class ObjectAPI {
 			list2.add(list.get(i));
 		}
 		return list2;
-	}// ¿¹¿Ü Ã³¸® ¾ÈÇÔ
+	}// ì˜ˆì™¸ ì²˜ë¦¬ ì•ˆí•¨
 	
 	public static boolean isArrayHasIndex(Object arr, int index) {
 		if (index < 0) {
@@ -30,7 +30,7 @@ public class ObjectAPI {
 		} else {
 			return true;
 		}
-	}// ¿¹¿Ü Ã³¸® ¾ÈÇÔ
+	}// ì˜ˆì™¸ ì²˜ë¦¬ ì•ˆí•¨
 
 	public static boolean isListHasIndex(List<?> list, int index) {
 		if (index < 0) {
@@ -40,7 +40,7 @@ public class ObjectAPI {
 		} else {
 			return true;
 		}
-	}// ¿¹¿Ü Ã³¸® ¾ÈÇÔ
+	}// ì˜ˆì™¸ ì²˜ë¦¬ ì•ˆí•¨
 
 	public static List<String> toList(Set<String> set) {
 		List<String> list = new LinkedList<String>();
@@ -48,7 +48,7 @@ public class ObjectAPI {
 			list.add(entry);
 		}
 		return list;
-	}// ¿¹¿Ü Ã³¸® ¾ÈÇÔ
+	}// ì˜ˆì™¸ ì²˜ë¦¬ ì•ˆí•¨
 
 	public static int toInteger(BigDecimal big) {
 		try {
@@ -56,7 +56,7 @@ public class ObjectAPI {
 		} catch (Exception e) {
 			return 0;
 		}
-	}// ¿¹¿Ü ÀÚÃ¼ Ã³¸®
+	}// ì˜ˆì™¸ ìì²´ ì²˜ë¦¬
 
 	public static int toInteger(String str) {
 		return Integer.valueOf(str);

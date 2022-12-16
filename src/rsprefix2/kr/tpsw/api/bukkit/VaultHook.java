@@ -1,4 +1,4 @@
-package rsprefix.kr.tpsw.api.bukkit;
+package rsprefix2.kr.tpsw.api.bukkit;
 
 import net.milkbowl.vault.chat.Chat;
 import net.milkbowl.vault.economy.Economy;

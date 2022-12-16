@@ -13,9 +13,9 @@ import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import rsprefix.kr.tpsw.api.bukkit.PlayersAPI;
-import rsprefix.kr.tpsw.api.bukkit.VaultHook;
-import rsprefix.kr.tpsw.api.publica.YamlConfiguration;
+import rsprefix2.kr.tpsw.api.bukkit.PlayersAPI;
+import rsprefix2.kr.tpsw.api.bukkit.VaultHook;
+import rsprefix2.kr.tpsw.api.publica.YamlConfiguration;
 
 public class RsPrefix extends JavaPlugin {
 
@@ -26,7 +26,7 @@ public class RsPrefix extends JavaPlugin {
 
 	public void onEnable() {
 		plugin = this;
-		config = new YamlConfiguration("plugins\\RsPrefix\\config.yml");
+		config = new YamlConfiguration("plugins/RsPrefix/config.yml");
 		if (config.getInt("config.mode") == 0) {
 			config.set("config.mode", 1);
 		} else {
@@ -40,49 +40,37 @@ public class RsPrefix extends JavaPlugin {
 		}
 		
 		getCommand("prefix").setExecutor(new CommandPrefix());
-		getCommand("pradmin").setExecutor(new CommandPrAdmin());
+		getCommand("preadmin").setExecutor(new CommandPrAdmin());
 		getCommand("rsprefix").setExecutor(new CommandRsPrefix());
 		Bukkit.getPluginManager().registerEvents(new EventListener(), this);
 
 		PlayersAPI.initLoad(this);
-		WordPressParsing.initRegister(this, getCommand("prupdate"), this.getFile());
 
-		File f = new File("plugins\\RsPrefix\\Users");
+		File f = new File("plugins/RsPrefix/Users");
 		if (!f.exists()) {
 			f.mkdirs();
-		}// À¯Àú Æú´õ »ı¼º
+		}// ìœ ì € í´ë” ìƒì„±
 
-		f = new File("plugins\\RsPrefix\\RanPrefixs");
+		f = new File("plugins/RsPrefix/RanPrefixs");
 		if (!f.exists()) {
 			f.mkdirs();
-		}// ·£´ı ÄªÈ£ Æú´õ »ı¼º
+		}// ëœë¤ ì¹­í˜¸ í´ë” ìƒì„±
 
-		f = new File("plugins\\RsPrefix\\RanPrefixs2");
-		if (!f.exists()) {
-			f.mkdirs();
-		}// ·£´ı ÄªÈ£ Æú´õ »ı¼º
-
-		if (false == new File("plugins\\RsPrefix\\RanPrefixs\\basic.txt").exists()) {
+		if (false == new File("plugins/RsPrefix/RanPrefixs/basic.txt").exists()) {
 			RanPreAPI.initSetting();
 		}
 
 		RanPreAPI.initLoad();
-		for (Pclass pc : RanPreAPI.Pclass.values()) {
-			pc.loadMap();// È®·ü º¸Á¤ ·Îµå
-		}
-		FileAPI.initLoad();// Á¢¼Ó£OÀÎ À¯Àú µ¥ÀÌÅÍ ·Îµå
+		FileAPI.initLoad();// ì ‘ì†ì¦ì¸ ìœ ì € ë°ì´í„° ë¡œë“œ
 
 		VaultHook.hookSetup();
-		System.out.println("[RsPrefix] Vault ¿¬µ¿ ¿©ºÎ: " + VaultHook.isVaulthooked);
-		System.out.println("[RsPrefix] Chat ¿¬µ¿ ¿©ºÎ: " + VaultHook.isChatHook);
+		System.out.println("[RsPrefix] Vault ì—°ë™ ì—¬ë¶€: " + VaultHook.isVaulthooked);
+		System.out.println("[RsPrefix] Chat ì—°ë™ ì—¬ë¶€: " + VaultHook.isChatHook);
 	}
 
 	public void onDisable() {
 		config.saveYaml();
-		FileAPI.endSave();// À¯Àú µ¥ÀÌÅÍ ¼¼ÀÌºê
-		for (Pclass pc : RanPreAPI.Pclass.values()) {
-			pc.saveMap();// È®·ü º¸Á¤ ¼¼ÀÌºê
-		}
+		FileAPI.endSave();// ìœ ì € ë°ì´í„° ì„¸ì´ë¸Œ
 		RanPreAPI.initSave();
 	}
 }

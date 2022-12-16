@@ -1,0 +1,16 @@
+version: "3"
+services:
+  minecraft:
+    image: hapewe/spigot:1.19.2
+    platform: linux/arm64
+    container_name: minecraft
+    volumes:
+      - .data/minecraft:/mnt/minecraft
+      - .data/start.sh:/opt/minecraft/start.sh
+    ports:
+      - 25565:25565
+      - 5005:5005
+    environment:
+      HEAP: 1G
+    stdin_open: true
+    tty: true

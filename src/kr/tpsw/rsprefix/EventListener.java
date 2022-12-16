@@ -1,25 +1,19 @@
 package kr.tpsw.rsprefix;
 
 import kr.tpsw.rsprefix.api.FileAPI;
-import kr.tpsw.rsprefix.api.InvAPI;
 import kr.tpsw.rsprefix.api.PrefixPlayer;
 import kr.tpsw.rsprefix.api.RanPreAPI;
 
 import org.bukkit.Material;
-import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
-import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
-
-import rsprefix.kr.tpsw.api.bukkit.VaultHook;
 
 public class EventListener implements Listener {
 
@@ -30,7 +24,7 @@ public class EventListener implements Listener {
 				if (event.getItem().isSimilar(RanPreAPI.ranpre)) {
 					ItemStack is = event.getItem();
 					if (is.getAmount() == 1) {
-						event.getPlayer().setItemInHand(new ItemStack(0));
+						event.getPlayer().setItemInHand(new ItemStack(Material.AIR));
 					} else {
 						is.setAmount(is.getAmount() - 1);
 						event.getPlayer().setItemInHand(is);
@@ -46,7 +40,7 @@ public class EventListener implements Listener {
 		if (RsPrefix.prefixMode == 1) {
 			PrefixPlayer pp = FileAPI.getPrefixPlayer(event.getPlayer().getName());
 			if (pp.getMainPrefix().length() != 0) {
-				event.setFormat(pp.getMainPrefix() + " ¡×r" + event.getFormat());
+				event.setFormat(pp.getMainPrefix() + " Â§r" + event.getFormat());
 			}
 		}
 	}
@@ -65,66 +59,66 @@ public class EventListener implements Listener {
 		FileAPI.savePlayer(name, true);
 	}
 
-	@EventHandler
-	public void onClick(InventoryClickEvent event) {
-		if (event.getSlot() == -999) {
-			return;
-		} // ÀÎº¥Ã¢ ¹ş¾î³ª¸é Á¾·á
-
-		if (event.getInventory().getName().startsWith(InvAPI.horusCode)) {
-			event.setCancelled(true);
-			Material m = event.getCurrentItem().getType();
-			if (m == Material.WORKBENCH || m == Material.ANVIL) {
-				// ÀÌÀü, ´ÙÀ½ ¸ñ·Ï ¹öÆ°À» ´­·¶À» ¶§
-				ItemStack is = event.getCurrentItem();
-				if (is.hasItemMeta()) {
-					ItemMeta im = is.getItemMeta();
-					if (im.hasDisplayName()) {
-						String name = im.getDisplayName();
-						if (name.equals("¡×eÀÌÀü ¸ñ·Ï") || name.equals("¡×e´ÙÀ½ ¸ñ·Ï")) {
-							String inv = event.getInventory().getName();
-							int i1 = inv.indexOf("¡×b:");
-							String target = inv.substring(4, i1 - 1);
-							int index = Integer.valueOf(inv.substring(i1 + 3, inv.length()));
-							if (name.equals("¡×eÀÌÀü ¸ñ·Ï")) {
-								index--;
-							} else {
-								index++;
-							}
-							InvAPI.viewInv(target, (Player) event.getWhoClicked(), index);
-						}
-					}
-				}
-			} else if (m == Material.PAPER) {
-				String inv = event.getInventory().getName();
-				int i1 = inv.indexOf("¡×b:");
-				String target = inv.substring(4, i1 - 1);
-				if (event.getWhoClicked().getName().equals(target)) {
-					ItemStack is = event.getCurrentItem();
-					if (is.hasItemMeta()) {
-						ItemMeta im = is.getItemMeta();
-						if (im.hasDisplayName() && im.getDisplayName().matches("(¡×e)[0-9]+(¹ø Â° ÄªÈ£)")) {
-							String prefix = im.getLore().get(0);
-							prefix = prefix.substring(2, prefix.length());
-							PrefixPlayer pp = FileAPI.getPrefixPlayer(target);
-
-							pp.setMainPrefix(prefix);
-							pp.needUpdateInv = true;
-							((Player) event.getWhoClicked()).sendMessage("¡×6´ëÇ¥ ÄªÈ£¸¦ ¡×r<" + prefix + "¡×r>¡×6(À¸)·Î ¼³Á¤Çß½À´Ï´Ù.");
-
-							if (VaultHook.isChatHook) {
-								if (RsPrefix.prefixMode == 2) {
-									VaultHook.chat.setPlayerPrefix((Player) event.getWhoClicked(), prefix);
-								} else if (RsPrefix.prefixMode == 3) {
-									VaultHook.chat.setPlayerSuffix((Player) event.getWhoClicked(), prefix);
-								}
-							} // ÄªÈ£ ¼³Á¤2
-							event.getWhoClicked().closeInventory();
-						}
-					}
-				}
-
-			}
-		}
-	}
+//	@EventHandler
+//	public void onClick(InventoryClickEvent event) {
+//		if (event.getSlot() == -999) {
+//			return;
+//		} // ì¸ë²¤ì°½ ë²—ì–´ë‚˜ë©´ ì¢…ë£Œ
+//
+//		if (event.getInventory().getName().startsWith(InvAPI.horusCode)) {
+//			event.setCancelled(true);
+//			Material m = event.getCurrentItem().getType();
+//			if (m == Material.CRAFTING_TABLE || m == Material.ANVIL) {
+//				// ì´ì „, ë‹¤ìŒ ëª©ë¡ ë²„íŠ¼ì„ ëˆŒë €ì„ ë•Œ
+//				ItemStack is = event.getCurrentItem();
+//				if (is.hasItemMeta()) {
+//					ItemMeta im = is.getItemMeta();
+//					if (im.hasDisplayName()) {
+//						String name = im.getDisplayName();
+//						if (name.equals("Â§eì´ì „ ëª©ë¡") || name.equals("Â§eë‹¤ìŒ ëª©ë¡")) {
+//							String inv = event.getInventory().getName();
+//							int i1 = inv.indexOf("Â§b:");
+//							String target = inv.substring(4, i1 - 1);
+//							int index = Integer.valueOf(inv.substring(i1 + 3, inv.length()));
+//							if (name.equals("Â§eì´ì „ ëª©ë¡")) {
+//								index--;
+//							} else {
+//								index++;
+//							}
+//							InvAPI.viewInv(target, (Player) event.getWhoClicked(), index);
+//						}
+//					}
+//				}
+//			} else if (m == Material.PAPER) {
+//				String inv = event.getInventory().getName();
+//				int i1 = inv.indexOf("Â§b:");
+//				String target = inv.substring(4, i1 - 1);
+//				if (event.getWhoClicked().getName().equals(target)) {
+//					ItemStack is = event.getCurrentItem();
+//					if (is.hasItemMeta()) {
+//						ItemMeta im = is.getItemMeta();
+//						if (im.hasDisplayName() && im.getDisplayName().matches("(Â§e)[0-9]+(ë²ˆ ì§¸ ì¹­í˜¸)")) {
+//							String prefix = im.getLore().get(0);
+//							prefix = prefix.substring(2, prefix.length());
+//							PrefixPlayer pp = FileAPI.getPrefixPlayer(target);
+//
+//							pp.setMainPrefix(prefix);
+//							pp.needUpdateInv = true;
+//							((Player) event.getWhoClicked()).sendMessage("Â§6ëŒ€í‘œ ì¹­í˜¸ë¥¼ Â§r<" + prefix + "Â§r>Â§6(ìœ¼)ë¡œ ì„¤ì •í–ˆìŠµë‹ˆë‹¤.");
+//
+//							if (VaultHook.isChatHook) {
+//								if (RsPrefix.prefixMode == 2) {
+//									VaultHook.chat.setPlayerPrefix((Player) event.getWhoClicked(), prefix);
+//								} else if (RsPrefix.prefixMode == 3) {
+//									VaultHook.chat.setPlayerSuffix((Player) event.getWhoClicked(), prefix);
+//								}
+//							} // ì¹­í˜¸ ì„¤ì •2
+//							event.getWhoClicked().closeInventory();
+//						}
+//					}
+//				}
+//
+//			}
+//		}
+//	}
 }

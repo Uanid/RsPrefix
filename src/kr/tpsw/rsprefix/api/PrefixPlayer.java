@@ -6,7 +6,7 @@ import java.util.List;
 
 import org.bukkit.inventory.Inventory;
 
-import rsprefix.kr.tpsw.api.publica.ObjectAPI;
+import rsprefix2.kr.tpsw.api.publica.ObjectAPI;
 
 public class PrefixPlayer {
 

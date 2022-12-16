@@ -18,7 +18,6 @@ import java.util.Map;
 import java.util.Random;
 
 import kr.tpsw.rsprefix.RsPrefix;
-import kr.tpsw.rsprefix.WordPressParsing;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -28,308 +27,304 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 public class RanPreAPI {
 
-	public static List<String> basic;// ¾ê¸¸ ¿¹¿Ü
-	private static List<String> classic;
-	private static List<String> rare;
-	private static List<String> epic;
-	private static List<String> legendary;
-	private static Random rr = new Random();
+    public static List<String> basic;// ì–˜ë§Œ ì˜ˆì™¸
+    private static List<String> classic;
+    private static List<String> rare;
+    private static List<String> epic;
+    private static List<String> legendary;
+    private static Random rr = new Random();
 
-	public static ItemStack ranpre = new ItemStack(Material.BOOK);
-	// ÄªÈ£ º¸Á¤
+    public static ItemStack ranpre = new ItemStack(Material.BOOK);
+    // ì¹­í˜¸ ë³´ì •
 
-	static {
-		ItemMeta im = ranpre.getItemMeta();
-		im.setDisplayName("¡×a[¡×c·£´ı ÄªÈ£ÆÑ¡×a]");
-		List<String> list = new ArrayList<String>();
-		list.add("¡×r¡×5¿ìÅ¬¸¯ÇÏ¿© ·£´ı ÄªÈ£¸¦ È¹µæÇÒ ¼ö ÀÖ½À´Ï´Ù.");
-		im.setLore(list);
-		ranpre.setItemMeta(im);
-	}
+    static {
+        ItemMeta im = ranpre.getItemMeta();
+        im.setDisplayName("Â§a[Â§cëœë¤ ì¹­í˜¸íŒ©Â§a]");
+        List<String> list = new ArrayList<String>();
+        list.add("Â§rÂ§5ìš°í´ë¦­í•˜ì—¬ ëœë¤ ì¹­í˜¸ë¥¼ íšë“í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.");
+        im.setLore(list);
+        ranpre.setItemMeta(im);
+    }
 
-	public static void giveRanPreBook(Player player) {
-		int firstEmpty = player.getInventory().firstEmpty();
-		if (firstEmpty == -1) {
-			player.getWorld().dropItem(player.getLocation(), ranpre);
-		} else {
-			player.getInventory().addItem(ranpre);
-		}
-	}
+    public static void giveRanPreBook(Player player) {
+        int firstEmpty = player.getInventory().firstEmpty();
+        if (firstEmpty == -1) {
+            player.getWorld().dropItem(player.getLocation(), ranpre);
+        } else {
+            player.getInventory().addItem(ranpre);
+        }
+    }
 
-	public static void runRandomPrefix(Player sender) {
-		PrefixPlayer pp = FileAPI.getPrefixPlayer(sender.getName());
-		int i = RanPreAPI.getRanClass(sender.getName());
-		if (i == 1) {// ÀÏ¹İ
-			String pre = getRan(classic);
-			List<String> list = pp.getList();
-			if (!list.contains(pre)) {
-				list.add(pre);
-			}
-			pp.needUpdateInv = true;
-			if (RsPrefix.useRandomPrefixBroadCast) {
-				Bukkit.broadcastMessage("¡×e" + sender.getName() + "´ÔÀÌ ¡×fÀÏ¹İ ¡×r<" + pre + "¡×r> ¡×eÄªÈ£¸¦ È¹µæÇß½À´Ï´Ù");
-			} else {
-				sender.sendMessage("¡×fÀÏ¹İ ¡×r<" + pre + "¡×r> ¡×eÄªÈ£¸¦ È¹µæÇß½À´Ï´Ù");
-			}
-		} else if (i == 2) {// Èñ±Í
-			String pre = getRan(rare);
-			List<String> list = pp.getList();
-			if (!list.contains(pre)) {
-				list.add(pre);
-			}
-			pp.needUpdateInv = true;
-			if (RsPrefix.useRandomPrefixBroadCast) {
-				Bukkit.broadcastMessage("¡×e" + sender.getName() + "´ÔÀÌ ¡×bÈñ±Í ¡×r<" + pre + "¡×r> ¡×eÄªÈ£¸¦ È¹µæÇß½À´Ï´Ù!");
-			} else {
-				sender.sendMessage("¡×bÈñ±Í ¡×r<" + pre + "¡×r> ¡×eÄªÈ£¸¦ È¹µæÇß½À´Ï´Ù!");
-			}
-		} else if (i == 3) {// ¿µ¿õ
-			String pre = getRan(epic);
-			List<String> list = pp.getList();
-			if (!list.contains(pre)) {
-				list.add(pre);
-			}
-			pp.needUpdateInv = true;
-			if (RsPrefix.useRandomPrefixBroadCast) {
-				Bukkit.broadcastMessage("¡×e¿Í¿ì " + sender.getName() + "´ÔÀÌ ¡×6¿¡ÇÈ ¡×r<" + pre + "¡×r> ¡×eÄªÈ£¸¦ È¹µæÇß½À´Ï´Ù!");
-			} else {
-				sender.sendMessage("¡×e¿Í¿ì! ¡×6¿¡ÇÈ ¡×r<" + pre + "¡×r> ¡×eÄªÈ£ÀÔ´Ï´Ù!");
-			}
-		} else if (i == 4) {// Àü¼³
-			String pre = getRan(legendary);
-			List<String> list = pp.getList();
-			if (!list.contains(pre)) {
-				list.add(pre);
-			}
-			pp.needUpdateInv = true;
-			Bukkit.broadcastMessage("¡×e¿Í¿ì! ¡×c" + sender.getName() + "¡×e´ÔÀÌ ¡×f[¡×6Àü¼³¡×f] ¡×r<" + pre + "¡×r> ¡×eÄªÈ£¸¦ È¹µæÇß½À´Ï´Ù!");
-			// sender.sendMessage("¡×e¿Í¿ì! ¡×6Àü¼³ ¡×r< " + pre + "¡×r> ¡×eÄªÈ£ÀÔ´Ï´Ù!");
-		} else {
-			// Á¸Àç ºÒ°¡´ÉÇÑ °æ¿ì
-		}
-	}
+    public static void runRandomPrefix(Player sender) {
+        PrefixPlayer pp = FileAPI.getPrefixPlayer(sender.getName());
+        int i = RanPreAPI.getRanClass(sender.getName());
+        if (i == 1) {// ì¼ë°˜
+            String pre = getRan(classic);
+            List<String> list = pp.getList();
+            if (!list.contains(pre)) {
+                list.add(pre);
+            }
+            pp.needUpdateInv = true;
+            if (RsPrefix.useRandomPrefixBroadCast) {
+                Bukkit.broadcastMessage("Â§e" + sender.getName() + "ë‹˜ì´ Â§fì¼ë°˜ Â§r<" + pre + "Â§r> Â§eì¹­í˜¸ë¥¼ íšë“í–ˆìŠµë‹ˆë‹¤");
+            } else {
+                sender.sendMessage("Â§fì¼ë°˜ Â§r<" + pre + "Â§r> Â§eì¹­í˜¸ë¥¼ íšë“í–ˆìŠµë‹ˆë‹¤");
+            }
+        } else if (i == 2) {// í¬ê·€
+            String pre = getRan(rare);
+            List<String> list = pp.getList();
+            if (!list.contains(pre)) {
+                list.add(pre);
+            }
+            pp.needUpdateInv = true;
+            if (RsPrefix.useRandomPrefixBroadCast) {
+                Bukkit.broadcastMessage("Â§e" + sender.getName() + "ë‹˜ì´ Â§bí¬ê·€ Â§r<" + pre + "Â§r> Â§eì¹­í˜¸ë¥¼ íšë“í–ˆìŠµë‹ˆë‹¤!");
+            } else {
+                sender.sendMessage("Â§bí¬ê·€ Â§r<" + pre + "Â§r> Â§eì¹­í˜¸ë¥¼ íšë“í–ˆìŠµë‹ˆë‹¤!");
+            }
+        } else if (i == 3) {// ì˜ì›…
+            String pre = getRan(epic);
+            List<String> list = pp.getList();
+            if (!list.contains(pre)) {
+                list.add(pre);
+            }
+            pp.needUpdateInv = true;
+            if (RsPrefix.useRandomPrefixBroadCast) {
+                Bukkit.broadcastMessage("Â§eì™€ìš° " + sender.getName() + "ë‹˜ì´ Â§6ì—í”½ Â§r<" + pre + "Â§r> Â§eì¹­í˜¸ë¥¼ íšë“í–ˆìŠµë‹ˆë‹¤!");
+            } else {
+                sender.sendMessage("Â§eì™€ìš°! Â§6ì—í”½ Â§r<" + pre + "Â§r> Â§eì¹­í˜¸ì…ë‹ˆë‹¤!");
+            }
+        } else if (i == 4) {// ì „ì„¤
+            String pre = getRan(legendary);
+            List<String> list = pp.getList();
+            if (!list.contains(pre)) {
+                list.add(pre);
+            }
+            pp.needUpdateInv = true;
+            Bukkit.broadcastMessage("Â§eì™€ìš°! Â§c" + sender.getName() + "Â§eë‹˜ì´ Â§f[Â§6ì „ì„¤Â§f] Â§r<" + pre + "Â§r> Â§eì¹­í˜¸ë¥¼ íšë“í–ˆìŠµë‹ˆë‹¤!");
+            // sender.sendMessage("Â§eì™€ìš°! Â§6ì „ì„¤ Â§r< " + pre + "Â§r> Â§eì¹­í˜¸ì…ë‹ˆë‹¤!");
+        } else {
+            // ì¡´ì¬ ë¶ˆê°€ëŠ¥í•œ ê²½ìš°
+        }
+    }
 
-	public static void initSetting() {
-		if (WordPressParsing.IS_DATA_PAGE_CONNETED) {
-			PrefixDownloader.saveNewRandomPrefixs();
-		} else {
-			saveNewPrefixs(new File("plugins\\RsPrefix\\RanPrefixs\\basic.txt"), new String[] { "¡×f´ººñ" });
-			saveNewPrefixs(new File("plugins\\RsPrefix\\RanPrefixs\\classic.txt"), new String[] { "¡×f[ÃÊº¸ÀÚ]" });
-			saveNewPrefixs(new File("plugins\\RsPrefix\\RanPrefixs\\rare.txt"), new String[] { "¡×b[Ä£ÀıÇÑ]" });
-			saveNewPrefixs(new File("plugins\\RsPrefix\\RanPrefixs\\epic.txt"), new String[] { "¡×f[¡×6¿¡ÇÈ¡×f]" });
-			saveNewPrefixs(new File("plugins\\RsPrefix\\RanPrefixs\\legendary.txt"), new String[] { "¡×a[¡×c¼­¹ö¸¶½ºÅÍ¡×a]" });
-		}
-	}
+    public static void initSetting() {
+        saveNewPrefixs(new File("plugins/RsPrefix/RanPrefixs/basic.txt"), new String[]{"Â§fë‰´ë¹„"});
+        saveNewPrefixs(new File("plugins/RsPrefix/RanPrefixs/classic.txt"), new String[]{"Â§f[ì´ˆë³´ì]"});
+        saveNewPrefixs(new File("plugins/RsPrefix/RanPrefixs/rare.txt"), new String[]{"Â§b[ì¹œì ˆí•œ]"});
+        saveNewPrefixs(new File("plugins/RsPrefix/RanPrefixs/epic.txt"), new String[]{"Â§f[Â§6ì—í”½Â§f]"});
+        saveNewPrefixs(new File("plugins/RsPrefix/RanPrefixs/legendary.txt"), new String[]{"Â§a[Â§cì„œë²„ë§ˆìŠ¤í„°Â§a]"});
+    }
 
-	public static void saveNewPrefixs(File f, String s[]) {
-		try {
-			FileWriter fw = new FileWriter(f);
-			BufferedWriter bw = new BufferedWriter(fw);
-			for (String prefix : s) {
-				bw.write(prefix + "\n");
-			}
-			bw.close();
-			fw.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+    public static void saveNewPrefixs(File f, String s[]) {
+        try {
+            FileWriter fw = new FileWriter(f);
+            BufferedWriter bw = new BufferedWriter(fw);
+            for (String prefix : s) {
+                bw.write(prefix + " ");
+            }
+            bw.close();
+            fw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
-	public static void initLoad() {
-		basic = getBuffered("plugins\\RsPrefix\\RanPrefixs\\basic.txt");
-		classic = getBuffered("plugins\\RsPrefix\\RanPrefixs\\classic.txt");
-		rare = getBuffered("plugins\\RsPrefix\\RanPrefixs\\rare.txt");
-		epic = getBuffered("plugins\\RsPrefix\\RanPrefixs\\epic.txt");
-		legendary = getBuffered("plugins\\RsPrefix\\RanPrefixs\\legendary.txt");
-	}
+    public static void initLoad() {
+        basic = getBuffered("plugins/RsPrefix/RanPrefixs/basic.txt");
+        classic = getBuffered("plugins/RsPrefix/RanPrefixs/classic.txt");
+        rare = getBuffered("plugins/RsPrefix/RanPrefixs/rare.txt");
+        epic = getBuffered("plugins/RsPrefix/RanPrefixs/epic.txt");
+        legendary = getBuffered("plugins/RsPrefix/RanPrefixs/legendary.txt");
+    }
 
-	public static void initSave() {
-		saveBuffered(basic, "plugins\\RsPrefix\\RanPrefixs\\basic.txt");
-		saveBuffered(classic, "plugins\\RsPrefix\\RanPrefixs\\classic.txt");
-		saveBuffered(rare, "plugins\\RsPrefix\\RanPrefixs\\rare.txt");
-		saveBuffered(epic, "plugins\\RsPrefix\\RanPrefixs\\epic.txt");
-		saveBuffered(legendary, "plugins\\RsPrefix\\RanPrefixs\\legendary.txt");
-	}
+    public static void initSave() {
+        saveBuffered(basic, "plugins/RsPrefix/RanPrefixs/basic.txt");
+        saveBuffered(classic, "plugins/RsPrefix/RanPrefixs/classic.txt");
+        saveBuffered(rare, "plugins/RsPrefix/RanPrefixs/rare.txt");
+        saveBuffered(epic, "plugins/RsPrefix/RanPrefixs/epic.txt");
+        saveBuffered(legendary, "plugins/RsPrefix/RanPrefixs/legendary.txt");
+    }
 
-	private static String getRan(List<String> list) {
-		int size = rr.nextInt(list.size());
-		return list.get(size);
-	}
+    private static String getRan(List<String> list) {
+        int size = rr.nextInt(list.size());
+        return list.get(size);
+    }
 
-	private static int getRanClass(String name) {
-		int ran = rr.nextInt(1000);
-		if (getMap(Pclass.LEGENDARY, name) >= 200) {
-			// Bukkit.broadcastMessage("Àü¼³ º¸Á¤");
-			setMap(Pclass.LEGENDARY, name);
-			return 4;
-		} else if (getMap(Pclass.EPIC, name) >= 50) {
-			if (ran < 10) {
-				// Bukkit.broadcastMessage("¿¡ÇÈ º¸Á¤ +Àü¼³");
-				setMap(Pclass.LEGENDARY, name);
-				return 4;
-			} else {
-				// Bukkit.broadcastMessage("¿¡ÇÈ º¸Á¤");
-				addMap(Pclass.LEGENDARY, name);
-				setMap(Pclass.EPIC, name);
-				return 3;
-			}
-		} else if (getMap(Pclass.RARE, name) >= 5) {
-			if (ran < 10) {
-				// Bukkit.broadcastMessage("·¹¾î º¸Á¤ +Àü¼³");
-				setMap(Pclass.LEGENDARY, name);
-				return 4;
-			} else if (ran < 50) {
-				// Bukkit.broadcastMessage("·¹¾î º¸Á¤ +¿¡ÇÈ");
-				addMap(Pclass.LEGENDARY, name);
-				setMap(Pclass.EPIC, name);
-				return 3;
-			} else {
-				// Bukkit.broadcastMessage("·¹¾î º¸Á¤");
-				addMap(Pclass.LEGENDARY, name);
-				addMap(Pclass.EPIC, name);
-				setMap(Pclass.RARE, name);
-				return 2;
-			}
-		} else {
-			if (ran < 10) {
-				// Bukkit.broadcastMessage("ÀÏ¹İ +Àü¼³");
-				setMap(Pclass.LEGENDARY, name);
-				return 4;
-			} else if (ran < 50) {
-				// Bukkit.broadcastMessage("ÀÏ¹İ +¿¡ÇÈ");
-				addMap(Pclass.LEGENDARY, name);
-				setMap(Pclass.EPIC, name);
-				return 3;
-			} else if (ran < 250) {
-				// Bukkit.broadcastMessage("ÀÏ¹İ +Èñ±Í");
-				addMap(Pclass.LEGENDARY, name);
-				addMap(Pclass.EPIC, name);
-				setMap(Pclass.RARE, name);
-				return 2;
-			} else {
-				addMap(Pclass.LEGENDARY, name);
-				addMap(Pclass.EPIC, name);
-				addMap(Pclass.RARE, name);
-				return 1;
-			}
-		}
-	}
+    private static int getRanClass(String name) {
+        int ran = rr.nextInt(1000);
+        if (getMap(Pclass.LEGENDARY, name) >= 200) {
+            // Bukkit.broadcastMessage("ì „ì„¤ ë³´ì •");
+            setMap(Pclass.LEGENDARY, name);
+            return 4;
+        } else if (getMap(Pclass.EPIC, name) >= 50) {
+            if (ran < 10) {
+                // Bukkit.broadcastMessage("ì—í”½ ë³´ì • +ì „ì„¤");
+                setMap(Pclass.LEGENDARY, name);
+                return 4;
+            } else {
+                // Bukkit.broadcastMessage("ì—í”½ ë³´ì •");
+                addMap(Pclass.LEGENDARY, name);
+                setMap(Pclass.EPIC, name);
+                return 3;
+            }
+        } else if (getMap(Pclass.RARE, name) >= 5) {
+            if (ran < 10) {
+                // Bukkit.broadcastMessage("ë ˆì–´ ë³´ì • +ì „ì„¤");
+                setMap(Pclass.LEGENDARY, name);
+                return 4;
+            } else if (ran < 50) {
+                // Bukkit.broadcastMessage("ë ˆì–´ ë³´ì • +ì—í”½");
+                addMap(Pclass.LEGENDARY, name);
+                setMap(Pclass.EPIC, name);
+                return 3;
+            } else {
+                // Bukkit.broadcastMessage("ë ˆì–´ ë³´ì •");
+                addMap(Pclass.LEGENDARY, name);
+                addMap(Pclass.EPIC, name);
+                setMap(Pclass.RARE, name);
+                return 2;
+            }
+        } else {
+            if (ran < 10) {
+                // Bukkit.broadcastMessage("ì¼ë°˜ +ì „ì„¤");
+                setMap(Pclass.LEGENDARY, name);
+                return 4;
+            } else if (ran < 50) {
+                // Bukkit.broadcastMessage("ì¼ë°˜ +ì—í”½");
+                addMap(Pclass.LEGENDARY, name);
+                setMap(Pclass.EPIC, name);
+                return 3;
+            } else if (ran < 250) {
+                // Bukkit.broadcastMessage("ì¼ë°˜ +í¬ê·€");
+                addMap(Pclass.LEGENDARY, name);
+                addMap(Pclass.EPIC, name);
+                setMap(Pclass.RARE, name);
+                return 2;
+            } else {
+                addMap(Pclass.LEGENDARY, name);
+                addMap(Pclass.EPIC, name);
+                addMap(Pclass.RARE, name);
+                return 1;
+            }
+        }
+    }
 
-	public static enum Pclass {// º£ÀÌÁ÷, Å¬·¡½ÄÀº »ç¿ëÇÏÁö ¾ÊÀ½
-		BASIC, CLASSIC, RARE, EPIC, LEGENDARY;
-		public Map<String, Integer> map = new HashMap<String, Integer>();
+    public static enum Pclass {// ë² ì´ì§, í´ë˜ì‹ì€ ì‚¬ìš©í•˜ì§€ ì•ŠìŒ
+        BASIC, CLASSIC, RARE, EPIC, LEGENDARY;
+        public Map<String, Integer> map = new HashMap<String, Integer>();
 
-		@SuppressWarnings("unchecked")
-		public void loadMap() {
-			File f = new File("plugins\\RsPrefix\\RanPrefixs2\\" + this.name() + ".ser");
-			if (f.exists())
-				try {
-					ObjectInputStream ois = new ObjectInputStream(new FileInputStream(f));
-					map = (Map<String, Integer>) ois.readObject();
-					ois.close();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-		}
+        @SuppressWarnings("unchecked")
+        public void loadMap() {
+            File f = new File("plugins/RsPrefix/RanPrefixs2/" + this.name() + ".ser");
+            if (f.exists())
+                try {
+                    ObjectInputStream ois = new ObjectInputStream(new FileInputStream(f));
+                    map = (Map<String, Integer>) ois.readObject();
+                    ois.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+        }
 
-		public void saveMap() {
-			try {
-				ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(new File("plugins\\RsPrefix\\RanPrefixs2\\" + this.name() + ".ser")));
-				oos.writeObject(map);
-				oos.close();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-	}
+        public void saveMap() {
+            try {
+                ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(new File("plugins/RsPrefix/RanPrefixs2/" + this.name() + ".ser")));
+                oos.writeObject(map);
+                oos.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
-	public static boolean isRanpreClass(String classs) {
-		for (Pclass pc : Pclass.values()) {
-			if (pc.name().toLowerCase().equals(classs)) {
-				return true;
-			}
-		}
-		return false;
-	}
+    public static boolean isRanpreClass(String classs) {
+        for (Pclass pc : Pclass.values()) {
+            if (pc.name().toLowerCase().equals(classs)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
-	public static List<String> getRanpreList(String classs) {
-		switch (classs) {
-		case "basic":
-			return basic;
-		case "classic":
-			return classic;
-		case "rare":
-			return rare;
-		case "epic":
-			return epic;
-		case "legendary":
-			return legendary;
-		default:
-			return null;
-		}
-	}
+    public static List<String> getRanpreList(String classs) {
+        switch (classs) {
+            case "basic":
+                return basic;
+            case "classic":
+                return classic;
+            case "rare":
+                return rare;
+            case "epic":
+                return epic;
+            case "legendary":
+                return legendary;
+            default:
+                return null;
+        }
+    }
 
-	private static void setMap(Pclass pc, String name) {
-		pc.map.put(name, 0);
-	}
+    private static void setMap(Pclass pc, String name) {
+        pc.map.put(name, 0);
+    }
 
-	private static int getMap(Pclass pc, String name) {
-		if (pc.map.containsKey(name)) {
-			return pc.map.get(name);
-		} else {
-			return 0;
-		}
-	}
+    private static int getMap(Pclass pc, String name) {
+        if (pc.map.containsKey(name)) {
+            return pc.map.get(name);
+        } else {
+            return 0;
+        }
+    }
 
-	private static void addMap(Pclass pc, String name) {
-		if (pc.map.containsKey(name)) {
-			pc.map.put(name, pc.map.get(name) + 1);
-		} else {
-			pc.map.put(name, 1);
-		}
-	}
+    private static void addMap(Pclass pc, String name) {
+        if (pc.map.containsKey(name)) {
+            pc.map.put(name, pc.map.get(name) + 1);
+        } else {
+            pc.map.put(name, 1);
+        }
+    }
 
-	private static void saveBuffered(List<String> list, String path) {
-		try {
-			File file = new File(path);
-			BufferedWriter bw = new BufferedWriter(new FileWriter(file));
-			for (String s : list) {
-				bw.write(s + "\n");
-			}
-			bw.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+    private static void saveBuffered(List<String> list, String path) {
+        try {
+            File file = new File(path);
+            BufferedWriter bw = new BufferedWriter(new FileWriter(file));
+            for (String s : list) {
+                bw.write(s + " ");
+            }
+            bw.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
-	private static List<String> getBuffered(String path) {
-		File file = new File(path);
-		if (!file.exists()) {
-			try {
-				file.createNewFile();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
+    private static List<String> getBuffered(String path) {
+        File file = new File(path);
+        if (!file.exists()) {
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 
-		FileInputStream fis = null;
-		try {
-			fis = new FileInputStream(file);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-		BufferedReader br = new BufferedReader(new InputStreamReader(fis));
-		String s;
-		List<String> list = new ArrayList<String>();
-		try {
-			while ((s = br.readLine()) != null) {
-				list.add(s);
-			}
-			br.close();
-			fis.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return list;
-	}
+        FileInputStream fis = null;
+        try {
+            fis = new FileInputStream(file);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        BufferedReader br = new BufferedReader(new InputStreamReader(fis));
+        String s;
+        List<String> list = new ArrayList<String>();
+        try {
+            while ((s = br.readLine()) != null) {
+                list.add(s);
+            }
+            br.close();
+            fis.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
 }
